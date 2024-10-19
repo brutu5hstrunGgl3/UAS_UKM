@@ -32,6 +32,10 @@ Route::middleware(['auth'])->group(function () {
     
     // Route::resource('user', UserController::class);
     Route::resource('lecturer', LecturerController::class);
+
+    Route::get('/bayar', function () {
+        return view('pages.Pembayaran.index');
+ })->name('pages.Pembayaran.index');
     
     // Route::resource('absensi', AttendanceController::class);
    
@@ -42,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('pages.Profile.UserProfile');  
 
 });
+
+
 
 
 Route::middleware(Admin::class)->group(function () {

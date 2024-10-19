@@ -98,17 +98,34 @@
     </ul>
 </li>
 <li class="nav-item dropdown ">
-@if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'ADMIN')
+@if(auth()->user()->rul == 'ADMIN')
     <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Laporan</span></a>@endif
     <ul class="dropdown-menu">
 
         <li>
-        @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+        @if(auth()->user()->rul == 'ADMIN')
             <a class="nav-link" href="">Pendaftaran Peserta</a>
             @endif
-            @if(auth()->user()->rul == 'ADMIN')
-            <a class="nav-link" href="">Pembayaran Bimbel</a>
+            
+           
+            <a class="nav-link" href="{{route('pages.Pembayaran.index') }}">Pembayaran Bimbel</a>
+           
+           
+        </li>
+
+    </ul>
+    <li class="nav-item dropdown ">
+@if(auth()->user()->rul == 'PESERTA')
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Transaksi</span></a>@endif
+    <ul class="dropdown-menu">
+
+        <li>
+        @if(auth()->user()->rul == 'PESERTA')
+            <a class="nav-link" href="">Bimbel</a>
             @endif
+            
+           
+           
            
         </li>
 

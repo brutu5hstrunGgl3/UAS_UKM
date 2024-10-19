@@ -12,7 +12,7 @@ class LecturerSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\lecturer::factory(10)->create();
+        \App\Models\lecturer::factory(100)->create();
         
     }
 }
