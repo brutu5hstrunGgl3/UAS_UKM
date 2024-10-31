@@ -12,7 +12,7 @@
             <ul class="sidebar-menu">
   @if(auth()->user()->rul == 'ADMIN')
 <li class="nav-item dropdown ">
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>User</span></a>
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-users"></i><span>User</span></a>
     <ul class="dropdown-menu">
         <li>
             <a class="nav-link" href="{{route('user.index')}}">Tambah User</a>
@@ -23,7 +23,7 @@
 @endif
 @if(auth()->user()->rul == 'ADMIN' | auth()->user()->rul == 'PEMATERI')
 <li class="nav-item dropdown ">
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Pemateri</span></a>
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-school"></i><span>Pemateri</span></a>
     <ul class="dropdown-menu">
         <li>
             <a class="nav-link" href="{{route('lecturer.index')}}">Tambah Kelas</a>
@@ -31,7 +31,7 @@
             @if(auth()->user()->rul == 'PESERTA')
             <li class="nav-item dropdown ">
             
-            <a href="{{route('lecturer.index')}}" class=""> <i class="fas fa-fire"></i><span>Materi</span></a>
+            <a href="{{route('lecturer.index')}}" class=""> <i class="fas fa-books"></i><span>Materi</span></a>
             @endif
         </li>
 
@@ -40,7 +40,7 @@
 
 @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
 <li class="nav-item dropdown ">
-    <a href="" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Absensi</span></a>
+    <a href="" class="nav-link has-dropdown"> <i class="fas fa-list"></i><span>Absensi</span></a>
     <ul class="dropdown-menu">
         <li>
             <a class="nav-link" href="{{ route('absensi.index') }}">Absensi peserta</a>
@@ -54,7 +54,7 @@
 
 
 <li class="nav-item dropdown ">
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Tugas</span></a>
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-book"></i><span>Tugas</span></a>
     <ul class="dropdown-menu">
         
         <li>
@@ -83,7 +83,7 @@
 
     </ul>
     <li class="nav-item dropdown ">
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Nilai</span></a>
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-star"></i><span>Nilai</span></a>
     <ul class="dropdown-menu">
         <li>
         @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
@@ -99,7 +99,7 @@
 </li>
 <li class="nav-item dropdown ">
 @if(auth()->user()->rul == 'ADMIN')
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Laporan</span></a>@endif
+    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-folder"></i><span>Laporan</span></a>@endif
     <ul class="dropdown-menu">
 
         <li>
@@ -108,7 +108,7 @@
             @endif
             
            
-            <a class="nav-link" href="{{route('pages.Pembayaran.index') }}">Pembayaran Bimbel</a>
+            <a class="nav-link" href="">Pembayaran Bimbel</a>
            
            
         </li>
@@ -116,12 +116,12 @@
     </ul>
     <li class="nav-item dropdown ">
 @if(auth()->user()->rul == 'PESERTA')
-    <a href="#" class="nav-link has-dropdown"> <i class="fas fa-fire"></i><span>Transaksi</span></a>@endif
+    <a  class="nav-link has-dropdown" href=""> <i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>@endif
     <ul class="dropdown-menu">
 
         <li>
         @if(auth()->user()->rul == 'PESERTA')
-            <a class="nav-link" href="">Bimbel</a>
+            <a class="nav-link" href="{{route('pages.Pembayaran.index') }}">Bimbel</a>
             @endif
             
            
