@@ -10,6 +10,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\Pemateri;
 use App\Http\Middleware\Peserta;
 use App\Http\Controllers\TugasController;
+use App\Http\Controllers\PembayaranController;
 
 use App\Http\Controllers\ProfileController;
 
@@ -36,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bayar', function () {
         return view('pages.Pembayaran.index');
  })->name('pages.Pembayaran.index');
+
+//  Route::get('/invoice', function () {
+//     return view('pages.Pembayaran.invoice');
+// })->name('pages.Pembayaran.invoice');
     
     // Route::resource('absensi', AttendanceController::class);
    
@@ -46,6 +51,16 @@ Route::middleware(['auth'])->group(function () {
     })->name('pages.Profile.UserProfile');  
 
 });
+Route::get('/form-bayar/{paket}/{harga}', [PembayaranController::class, 'form_bayar'])
+->name('pages.Pembayaran.form_bayar');
+
+Route::post('/invoice-preview', [PembayaranController::class, 'invoicePreview'])->name('invoice.preview');
+
+// Rute GET untuk menampilkan halaman invoice setelah formulir berhasil diproses
+Route::get('/invoice/{order_id}', [PembayaranController::class, 'showInvoice'])->name('invoice.show');
+
+
+
 
 
 

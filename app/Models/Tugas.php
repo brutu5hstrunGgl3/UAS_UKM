@@ -10,9 +10,7 @@ class Tugas extends Model
     use HasFactory;
 
     protected $fillable = [
-       
-        
-        
+           
         'learning',
         'lecturer',
         'file',

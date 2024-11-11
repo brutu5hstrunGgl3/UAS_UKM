@@ -28,6 +28,7 @@
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
+                                    
                                     <div>Rp.5000,000</div>
                                     <div>per 3 Bulan</div>
                                 </div>
@@ -52,7 +53,9 @@
                                 </div>
                             </div>
                             <div class="pricing-cta">
-                                <a href="#">Pesan <i class="fas fa-shopping-cart "></i></a>
+
+                            <a href="{{ route('pages.Pembayaran.form_bayar', ['paket' => 'Kantor', 'harga' => 5000000]) }}">
+                            Pesan <i class="fas fa-shopping-cart"></i></a>
                             </div>
                         </div>
                     </div>
@@ -63,6 +66,7 @@
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
+                                    
                                     <div>Rp.500.000</div>
                                     <div>per bulan</div>
                                 </div>
@@ -85,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="pricing-cta">
-                                <a href="#">Pesan  <i class="fas fa-shopping-cart"></i></a>
+                            <a href="{{ route('pages.Pembayaran.form_bayar', ['paket' => 'Private', 'harga' => 500000]) }}">Pesan <i class="fas fa-shopping-cart"></i></a>
                             </div>
                         </div>
                     </div>
