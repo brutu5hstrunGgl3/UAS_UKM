@@ -54,7 +54,7 @@
                             </div>
                             <div class="pricing-cta">
 
-                            <a href="{{ route('pages.Pembayaran.form_bayar', ['paket' => 'Kantor', 'harga' => 5000000]) }}">
+                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Kantor', 'harga' => 5000000]) }}">
                             Pesan <i class="fas fa-shopping-cart"></i></a>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Sertifakat</div>
+                                        <div class="pricing-item-label">Sertifikat</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="pricing-cta">
-                            <a href="{{ route('pages.Pembayaran.form_bayar', ['paket' => 'Private', 'harga' => 500000]) }}">Pesan <i class="fas fa-shopping-cart"></i></a>
+                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Private', 'harga' => 500000]) }}">Pesan <i class="fas fa-shopping-cart"></i></a>
                             </div>
                         </div>
                     </div>

@@ -51,8 +51,11 @@ Route::middleware(['auth'])->group(function () {
     })->name('pages.Profile.UserProfile');  
 
 });
-Route::get('/form-bayar/{paket}/{harga}', [PembayaranController::class, 'form_bayar'])
-->name('pages.Pembayaran.form_bayar');
+Route::get('/bayar/{paket}/{harga}', [PembayaranController::class, 'redirectToFormBayar'])
+    ->name('pages.Pembayaran.redirectToFormBayar');
+    
+    Route::get('/form-bayar/{encrypted}', [PembayaranController::class, 'form_bayar'])
+    ->name('pages.Pembayaran.form_bayar');
 
 Route::post('/invoice-preview', [PembayaranController::class, 'invoicePreview'])->name('invoice.preview');
 

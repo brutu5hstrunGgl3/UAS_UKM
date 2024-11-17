@@ -52,8 +52,8 @@
 
             </div>
             <div class="form-group mt-2 mb-2">
-                <img src="{{ captcha_src('math') }}" alt="captcha">
-                    
+                <img src="{{ captcha_src('mini') }}" alt="captcha">
+                    <br></br>
                     <input type="text" name="captcha"
                          class="form-control @error('captcha') is-invalid @enderror"
                          placeholder="Enter Captcha">

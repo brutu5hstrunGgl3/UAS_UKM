@@ -25,34 +25,29 @@
                                 <div class="invoice-title">
                                     <h2>Invoice</h2>
                                     <div class="invoice-number">Order #{{ $data['order_id'] }}</div>
-                                  
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-6">
-                
-                                            <strong>Billed To:</strong><br>
-                                            {{ $data['name'] }} <br>
+                                        <strong>Billed To:</strong><br>
+                                        {{ $data['name'] }} <br>
                                         {{ $data['no_telp'] }}<br>
                                         {{ $data['email'] }}<br>
-                                    
                                     </div>
                                     <div class="col-md-6 text-md-right">
                                         <strong>Order Date:</strong><br>
                                         {{ $data['tanggal_pembayaran'] }}<br><br>
                                     </div>
-                                    
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <address>
                                             <h4><strong>Payment Method:</strong><br>
-                                           Transfer
-                                           Bca : XXXXXXXX</br></h4>
+                                                Transfer<br>
+                                                BCA: XXXXXXXX
+                                            </h4>
                                         </address>
                                     </div>
-                                    
-                                   
                                 </div>
                             </div>
                         </div>
@@ -64,7 +59,7 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table-hover table-md table">
                                         <tr>
-                                            <th data-width="40">#</th>
+                                            <th>No</th>
                                             <th>Item</th>
                                             <th class="text-center">Price</th>
                                             <th class="text-center">Quantity</th>
@@ -77,7 +72,6 @@
                                             <td class="text-center">1</td>
                                             <td class="text-right">Rp. {{ number_format($data['harga'], 0, ',', '.') }}</td>
                                         </tr>
-                                      
                                     </table>
                                 </div>
                                 <div class="row mt-4">
@@ -86,14 +80,10 @@
                                         <p class="section-lead">The payment method that we provide is to make it easier for
                                             you to pay invoices.</p>
                                         <div class="images">
-                                            <img src="{{ asset('img/payment/visa.png') }}"
-                                                alt="visa">
-                                            <img src="{{ asset('img/payment/jcb.png') }}"
-                                                alt="jcb">
-                                            <img src="{{ asset('img/payment/mastercard.png') }}"
-                                                alt="mastercard">
-                                            <img src="{{ asset('img/payment/paypal.png') }}"
-                                                alt="paypal">
+                                            <img src="{{ asset('img/payment/visa.png') }}" alt="visa">
+                                            <img src="{{ asset('img/payment/jcb.png') }}" alt="jcb">
+                                            <img src="{{ asset('img/payment/mastercard.png') }}" alt="mastercard">
+                                            <img src="{{ asset('img/payment/paypal.png') }}" alt="paypal">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 text-right">
@@ -101,7 +91,6 @@
                                             <div class="invoice-detail-name">Subtotal</div>
                                             <div class="section-lead">Rp. {{ number_format($data['harga'], 0, ',', '.') }}</div>
                                         </div>
-                                     
                                         <hr class="mt-2 mb-2">
                                         <div class="invoice-detail-item">
                                             <div class="invoice-detail-name">Total</div>
@@ -113,14 +102,29 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="text-md-right">
-                        <div class="float-lg-left mb-lg-0 mb-3">
-                            <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process
-                                Payment</button>
-                            <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>
+
+                    <!-- Form Upload Bukti Pembayaran -->
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <!-- Hidden Input Fields -->
+                        <input type="hidden" name="name" value="{{ $data['name'] }}">
+                        <input type="hidden" name="no_telp" value="{{ $data['no_telp'] }}">
+                        <input type="hidden" name="email" value="{{ $data['email'] }}">
+                        <input type="hidden" name="paket" value="{{ $data['paket'] }}">
+                        <input type="hidden" name="harga" value="{{ $data['harga'] }}">
+                        <input type="hidden" name="tanggal_pembayaran" value="{{ $data['tanggal_pembayaran'] }}">
+
+                        <div class="form-group">
+                            <label for="bukti_pembayaran">Unggah Bukti Pembayaran</label>
+                            <input type="file" name="bukti_pembayaran" class="form-control" required>
                         </div>
-                        <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
-                    </div>
+
+                        <div class="text-md-right">
+                            <button type="submit" class="btn btn-primary">Kirim Invoice</button>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <button type="button" class="btn btn-warning">Print</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -128,7 +132,6 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-
+    <!-- JS Libraries -->
     <!-- Page Specific JS File -->
 @endpush
