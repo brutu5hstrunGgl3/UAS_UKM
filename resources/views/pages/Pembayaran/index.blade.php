@@ -1,99 +1,140 @@
 @extends('layouts.app')
 
-@section('title', 'Pricing')
+@section('title', 'Users')
 
 @push('style')
     <!-- CSS Libraries -->
+    <link rel="stylesheet"
+        href="{{ asset('library/selectric/public/selectric.css') }}">
 @endpush
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Pricing</h1>
+                <h1>Learning module system</h1>
+                <div class="section-header-button">
+                    <a href=""
+                        class="btn btn-primary">Add New</a>
+                </div>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Components</a></div>
-                    <div class="breadcrumb-item">Pricing</div>
+                   
                 </div>
             </div>
-
             <div class="section-body">
-                <h2 class="section-title">Harga Bimbel </h2>
-                <div class="row justify-content-center -mt-10">
-                    <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing">
-                            <div class="pricing-title">
-                                 Kantor
-                            </div>
-                            <div class="pricing-padding">
-                                <div class="pricing-price">
-                                    
-                                    <div>Rp.5000,000</div>
-                                    <div>per 3 Bulan</div>
-                                </div>
-                                <div class="pricing-details">
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Dapat Akun Pembelajaran</div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran Di Tempat </div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Sertifikat</div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Custom Materi</div>
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pricing-cta">
+                
+            @include('layouts.alert')
 
-                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Kantor', 'harga' => 5000000]) }}">
-                            Pesan <i class="fas fa-shopping-cart"></i></a>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <ul class="nav nav-pills">
+
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing pricing-highlight">
-                            <div class="pricing-title">
-                                Private
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                           
+                                <h4>All Posts</h4>
                             </div>
-                            <div class="pricing-padding">
-                                <div class="pricing-price">
-                                    
-                                    <div>Rp.500.000</div>
-                                    <div>per bulan</div>
+                            <div class="card-body">
+                                <div class="float-left">
+
                                 </div>
-                                <div class="pricing-details">
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Dapat akun bimbel</div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran di tempat bimbel</div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Sertifikat</div>
-                                    </div>
-                                    <div class="pricing-item">
-                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Jadwal senin-sabtu "waktu disesuaikan"</div>
+                                <div class="float-right">
+                                    <form method="GET" action="">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                class="form-control"
+                                                placeholder="Search" name="name">
+                                                
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                            <div class="pricing-cta">
-                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Private', 'harga' => 500000]) }}">Pesan <i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
+
+                                <div class="clearfix mb-3"></div>
+
+                                <div class="table-responsive">
+                                    <table class="table-striped table">
+                                        <tr>
+
+                                            <th>Name</th>
+                                            <th>No_telp</th>
+                                            <th>Email</th>
+                                            <th>Jenis_Paket</th>
+                                            <th>Harga</th>
+                                            <th>Status</th>
+                                            <th>Struk</th>
+                                            <th>Tanggal_Pembayaran</th>
+                                            <th>Action</th>
+                                        </tr>
+                                       
+                                            <tr>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                            
+                                            </td>
+                                            <td>
+                                           
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                
+                                            <div class="d-flex justify-content-center">
+                                                         <a href=""
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                        </a>
+
+                                                        <form onclick="return confirm('are you sure ? ')"  class="d-inline" action=" " method="POST"
+                                                            class="ml-2">
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                            <input type="hidden" name="_token"
+                                                                value="" />
+                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                        <!-- Modal Konfirmasi Penghapusan -->
+
+                                                        <!-- ====== -->
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div class="float-right">
+                               
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,6 +146,8 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('js/page/features-posts.js') }}"></script>
 @endpush

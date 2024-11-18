@@ -19,7 +19,7 @@ class PembayaranController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('pages.Pembayaran.list_pembayaran', compact('Pembayaran'));
+        return view('pages.Pembayaran.index', compact('pembayaran'));
     }
 
     public function create()

@@ -44,7 +44,7 @@
                                         <address>
                                             <h4><strong>Payment Method:</strong><br>
                                                 Transfer<br>
-                                                BCA: XXXXXXXX
+                                                BRI : 500601035093536
                                             </h4>
                                         </address>
                                     </div>

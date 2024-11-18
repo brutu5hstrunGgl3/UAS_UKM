@@ -28,10 +28,17 @@
         <li>
             <a class="nav-link" href="{{route('lecturer.index')}}">Tambah Kelas</a>
             @endif
-            @if(auth()->user()->rul == 'PESERTA')
+            
+            @if(auth()->user()->rul == 'PESERTA' ) 
             <li class="nav-item dropdown ">
             
-            <a href="{{route('lecturer.index')}}" class=""> <i class="fas fa-books"></i><span>Materi</span></a>
+            <a href="#" class="nav-link has-dropdown"> <i class="fas fa-book"></i><span>Materi</span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="nav-link" href="{{route('lecturer.index')}}"> lihat Materi </a>
+                </li>
+            </ul>
+            </li>
             @endif
         </li>
 
@@ -65,16 +72,17 @@
            
        
         <li>
-       
+        
             <a class="nav-link" href="{{route('tugas.index')}}"> lihat tugas </a>
-           
-           
+        
            
         </li>
         </li>
         
         <li>
-        @if(auth()->user()->rul == 'PESERTA')
+            
+        @if(auth()->user()->rul == 'PESERTA' && auth()->user()->payment_status == 'approved') 
+        
             <a class="nav-link" href=""> Upload Tugas </a>
             @endif
            
@@ -107,9 +115,9 @@
             <a class="nav-link" href="">Pendaftaran Peserta</a>
             @endif
             
-           
-            <a class="nav-link" href="">Pembayaran Bimbel</a>
-           
+            @if(auth()->user()->rul == 'ADMIN')
+            <a class="nav-link" href="{{route('pembayaran.index')}}">Pembayaran Bimbel</a>
+            @endif
            
         </li>
 
@@ -121,7 +129,7 @@
 
         <li>
         @if(auth()->user()->rul == 'PESERTA')
-            <a class="nav-link" href="{{route('pages.Pembayaran.index') }}">Bimbel</a>
+            <a class="nav-link" href="{{route('pages.Pembayaran.paket') }}">Bimbel</a>
             @endif
             
            

@@ -13,6 +13,7 @@ use App\Http\Controllers\TugasController;
 use App\Http\Controllers\PembayaranController;
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Lecturer;
 
 Route::get('/', function () {
     return view('pages.auth.auth-login');
@@ -35,8 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('lecturer', LecturerController::class);
 
     Route::get('/bayar', function () {
-        return view('pages.Pembayaran.index');
- })->name('pages.Pembayaran.index');
+        return view('pages.Pembayaran.paket');
+ })->name('pages.Pembayaran.paket');
 
 //  Route::get('/invoice', function () {
 //     return view('pages.Pembayaran.invoice');
@@ -63,6 +64,10 @@ Route::post('/invoice-preview', [PembayaranController::class, 'invoicePreview'])
 Route::get('/invoice/{order_id}', [PembayaranController::class, 'showInvoice'])->name('invoice.show');
 
 
+    
+
+
+
 
 
 
@@ -75,7 +80,7 @@ Route::middleware(Admin::class)->group(function () {
     Route::resource('absensi', AttendanceController::class);
    
     Route::prefix('admin')->group(function () {
-
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
            
 
     });
@@ -91,6 +96,13 @@ Route::middleware(Peserta::class)->group(function () {
    
     
 });
+
+// Route::group(['middleware' => ['auth', 'check.payment']], function() {
+//     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
+//     Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
+//     Route::get('/absensi', [AttendanceController::class, 'index'])->name('absensi.index');
+// });
+
 
 
 // Route::get('/login', function () {
