@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'position',
         'address',
         'divisi',
+        'status',
         
 
     ];
@@ -52,4 +54,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'user_id', 'id'); // Menggunakan user_id di tabel pembayarans
+    }
+    
 }

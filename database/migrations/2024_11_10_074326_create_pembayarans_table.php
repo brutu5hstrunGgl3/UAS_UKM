@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('no_telp')->nullable();
+            $table->string('no_telp')->nullable();  // Ubah menjadi string
             $table->string('email')->nullable();
             $table->string('jenis_paket')->nullable();
             $table->decimal('harga', 8, 2);

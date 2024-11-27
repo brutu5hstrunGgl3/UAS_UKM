@@ -14,7 +14,7 @@
             <div class="section-header">
                 <h1>Learning module system</h1>
                 <div class="section-header-button">
-                    <a href=""
+                    <a href="{{ route('user.create') }}"
                         class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
@@ -49,7 +49,7 @@
 
                                 </div>
                                 <div class="float-right">
-                                    <form method="GET" action="">
+                                    <form method="GET" action="{{ route('pembayaran.index') }}">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
@@ -69,54 +69,55 @@
                                         <tr>
 
                                             <th>Name</th>
-                                            <th>No_telp</th>
+                                            <th>No Telp</th>
                                             <th>Email</th>
-                                            <th>Jenis_Paket</th>
+                                            <th>Jenis Paket</th>
                                             <th>Harga</th>
                                             <th>Status</th>
                                             <th>Struk</th>
-                                            <th>Tanggal_Pembayaran</th>
+                                            <th>Tanggal Pembayaran</th>
                                             <th>Action</th>
                                         </tr>
-                                       
+                                        @foreach ($pembayarans as $pembayaran)
                                             <tr>
                                             <td>
-                                            
+                                            {{ $pembayaran->name }}
                                             </td>
                                             <td>
-                                            
+                                            {{ $pembayaran->no_telp }}
                                             </td>
                                             <td>
-                                            
+                                            {{ $pembayaran->email }}
                                             </td>
                                             <td>
-                                            
+                                            {{ $pembayaran->jenis_paket }}
                                             </td>
                                             <td>
-                                            
+                                            {{ $pembayaran-> harga }}
                                             </td>
                                             <td>
-                                            
+                                            {{ $pembayaran->status }}
                                             </td>
                                             <td>
-                                           
+                                            {{ $pembayaran->struk }}
                                             </td>
                                             <td>
+                                            {{ $pembayaran->tanggal_pembayaran }}
                                             </td>
                                             <td>
                                                 
                                             <div class="d-flex justify-content-center">
-                                                         <a href=""
+                                                         <a href=" {{ route('pembayaran.edit', $pembayaran->id) }}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form onclick="return confirm('are you sure ? ')"  class="d-inline" action=" " method="POST"
-                                                            class="ml-2">
+                                                        <form onclick="return confirm('are you sure ? ')"  class="d-inline" action=" {{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST"
+                                                        onsubmit="return confirm('Are you sure?')" class="d-inline"   class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
-                                                                value="" />
+                                                                value="{{ csrf_token() }}" />
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete">
                                                                 <i class="fas fa-times"></i> Delete
                                                             </button>
@@ -127,13 +128,13 @@
                                                     </div>
                                             </td>
                                         </tr>
-                                        
+                                        @endforeach
                                         </tbody>
 
                                     </table>
                                 </div>
                                 <div class="float-right">
-                               
+                                {{ $pembayarans->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

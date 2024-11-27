@@ -9,7 +9,7 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'pembayarans';
+ 
 
     protected $fillable = [
         
@@ -21,5 +21,16 @@ class Pembayaran extends Model
         'tanggal_pembayaran',
         'status',
         'struk',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id'); // Menggunakan user_id sebagai foreign key
+    }
+
+//   public function user()
+//   {
+//       return $this->belongsTo(User::class);
+//   }
 }

@@ -1,101 +1,117 @@
 <?php
 
+// app/Http/Controllers/PembayaranController.php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pembayaran;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
+
+
 {
 
     public function index(Request $request)
-    {
-        $pembayaran = DB::table('pembayarans')
-            ->when($request->input('name'), function ($query, $name) {
-                return $query->where('name', 'like', '%' . $name . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
 
-        return view('pages.Pembayaran.index', compact('pembayaran'));
+    {
+        $pembayarans = DB::table('pembayarans')
+        ->when($request->input('name'), function ($query, $name) {
+            return $query->where('name', 'like', '%' . $name . '%');
+        })
+        //->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+
+
+        
+        return view('pages.Pembayaran.index' , compact('pembayarans'));
     }
 
-    public function create()
+
+
+
+    public function formBayar()
     {
-        return view('pages.Pembayaran.invoice');
+        return view('pages.Pembayaran.formbayar');
     }
 
-
-    public function invoicePreview(Request $request)
-    {
-        // Ambil data dari form sebelumnya dan tampilkan di halaman preview
-        // dd($request->all());
-        $data = [
-            'order_id' => uniqid(), // ID unik untuk pesanan
-            'name' => $request->input('name'),
-            'no_telp' => $request->input('no_telp'),
-            'email' => $request->input('email'),
-            'paket' => $request->input('paket'),
-            'harga' => $request->input('harga'),
-            'tanggal_pembayaran' => $request->input('tanggal_pembayaran'),
-        ];
-
-        return view('pages.pembayaran.invoice', compact('data'));
-    }
-
-    public function invoiceConfirm(Request $request)
+    public function storePembayaran(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'no_telp' => 'required',
-            'email' => 'required',
-            'paket' => 'required',
-            'harga' => 'required',
-            'status' => 'required',
-            'struk' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
-            'tanggal_pembayaran' => 'required',
+            'name' => 'required|string|max:255',
+            'no_telp' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'jenis_paket' => 'required|string|max:255',
+            'harga' => 'required|numeric',
+            'tanggal_pembayaran' => 'required|date',
+            'struk' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
         ]);
 
-        // Menyimpan invoice
-        if ($request->file('invoice_file')) {
-            $filePath = $request->file('invoice_file')->store('invoices', 'public');
+        
+        // Menyimpan file bukti pembayaran jika ada
+        if ($request->hasFile('struk')) {
+            $filePath = $request->file('struk')->store('uploads/struk', 'public'); // Menyimpan file di folder public/uploads/struk
         }
+     
+        
 
         Pembayaran::create([
             'name' => $request->name,
             'no_telp' => $request->no_telp,
             'email' => $request->email,
-            'paket' => $request->paket,
+            'jenis_paket' => $request->jenis_paket,
             'harga' => $request->harga,
-            'status' => $request->status,
-            'struk' => $filePath ?? null,
+            'status' => 'Belum Bayar',
             'tanggal_pembayaran' => $request->tanggal_pembayaran,
+            'struk' => $filePath ?? null,
+            'user_id' => Auth::id(), // Menyimpan path file jika ada
+            
         ]);
 
-        return redirect()->route('home')->with('success', 'Pembayaran berhasil disimpan!');
+        return redirect()->route('form.bayar')->with('success', 'Data anda berhasil disimpan. Silakan Menunggu untuk disetujui oleh Admin');
     }
 
-    public function form_bayar($encrypted)
+    public function showForm(Request $request)
     {
-        try {
-            // Dekripsi data paket dan harga dari URL
-            $data = Crypt::decrypt($encrypted);
-    
-            $paket = $data['paket'];
-            $harga = $data['harga'];
-    
-            return view('pages.pembayaran.form_bayar', compact('paket', 'harga'));
-        } catch (\Exception $e) {
-            abort(404, 'Data tidak valid.');
-        }
+        // Ambil data dari query string
+        $paket = $request->query('paket');
+        $harga = $request->query('harga');
+
+        // Kirim data ke view
+        return view('pages.Pembayaran.formbayar', compact('paket', 'harga'));
     }
 
-    public function redirectToFormBayar($paket, $harga)
+    public function edit(Pembayaran $pembayaran)
 {
-    $encrypted = Crypt::encrypt(['paket' => $paket, 'harga' => $harga]);
+    return view('pages.Pembayaran.edit', compact('pembayaran'));
+}
 
-    return redirect()->route('pages.Pembayaran.form_bayar', ['encrypted' => $encrypted]);
+public function update(Request $request, Pembayaran $pembayaran)
+{
+    $request->validate([
+       
+        'status' => 'required|in:Belum Bayar,Sudah Bayar', // Validasi status
+    ]);
+
+    $pembayaran->update([
+       
+        'status' => $request->status, // Update status pembayaran
+    ]);
+
+    return redirect()->route('pembayaran.index')->with('success', 'Data berhasil diperbarui.');
 }
+
+
+
+    public function destroy(Pembayaran $pembayaran)
+    {
+        $pembayaran->delete();
+       
+       return redirect()->route('pembayaran.index')->with('success', 'Data anda berhasil di hapus');
+    }
 }
+

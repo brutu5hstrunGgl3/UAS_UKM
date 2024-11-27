@@ -3,7 +3,7 @@
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\AttendanceController;
 use Mews\Captcha\CaptchaController;
-use App\Http\Controllers\PemateriController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
@@ -12,17 +12,23 @@ use App\Http\Middleware\Peserta;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\PembayaranController;
 
-use App\Http\Controllers\ProfileController;
-use App\Models\Lecturer;
+
+
+
+Route::get('/login', function () {
+    return view('pages.auth.auth-login');
+})->name('login');
+
 
 Route::get('/', function () {
-    return view('pages.auth.auth-login');
+    return view('pages.app.LandingPage.landing');
 });
 
 
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('tugas', TugasController::class);
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     
     Route::get('/tugas/download/{learning}', [TugasController::class, 'download'])->name('tugas.download');
     Route::get('/captcha-refresh', [CaptchaController::class, 'refresh']);
@@ -39,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.Pembayaran.paket');
  })->name('pages.Pembayaran.paket');
 
+ Route::post('/form', function () {
+    return view('pages.Pembayaran.formbayar');
+})->name('pages.Pembayaran.formbayar');
+
 //  Route::get('/invoice', function () {
 //     return view('pages.Pembayaran.invoice');
 // })->name('pages.Pembayaran.invoice');
@@ -52,26 +62,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('pages.Profile.UserProfile');  
 
 });
-Route::get('/bayar/{paket}/{harga}', [PembayaranController::class, 'redirectToFormBayar'])
-    ->name('pages.Pembayaran.redirectToFormBayar');
-    
-    Route::get('/form-bayar/{encrypted}', [PembayaranController::class, 'form_bayar'])
-    ->name('pages.Pembayaran.form_bayar');
-
-Route::post('/invoice-preview', [PembayaranController::class, 'invoicePreview'])->name('invoice.preview');
-
-// Rute GET untuk menampilkan halaman invoice setelah formulir berhasil diproses
-Route::get('/invoice/{order_id}', [PembayaranController::class, 'showInvoice'])->name('invoice.show');
-
-
-    
-
-
-
-
-
-
-
 
 Route::middleware(Admin::class)->group(function () {
 
@@ -80,8 +70,7 @@ Route::middleware(Admin::class)->group(function () {
     Route::resource('absensi', AttendanceController::class);
    
     Route::prefix('admin')->group(function () {
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
-           
+   
 
     });
    
@@ -96,18 +85,23 @@ Route::middleware(Peserta::class)->group(function () {
    
     
 });
+Route::get('/form.bayar', [PembayaranController::class, 'showForm'])->name('form.bayar');
+Route::post('/pembayaran/store', [PembayaranController::class, 'storePembayaran'])->name('pembayaran.store');
+Route::delete('/pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+Route::get('/pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+Route::put('/pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
 
-// Route::group(['middleware' => ['auth', 'check.payment']], function() {
-//     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
-//     Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-//     Route::get('/absensi', [AttendanceController::class, 'index'])->name('absensi.index');
-// });
+Route::group(['middleware' => ['auth', 'Peserta']], function() {
+    Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
+    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
+    
+ });
 
 
 
-// Route::get('/login', function () {
-//     return view('pages.auth.auth-login');
-// })->name('login');
+// Route::get('/test', function () {
+//     return view('pages.pembayaran.test');
+//  })->name('/test');
 // Route::get('register', function () {
 //     return view('pages.auth.auth-register');
 // })->name('register');

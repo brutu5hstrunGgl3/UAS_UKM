@@ -19,17 +19,17 @@
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Harga Bimbel </h2>
+                <h2 class="section-title">Harga Bimbel</h2>
                 <div class="row justify-content-center -mt-10">
+                    <!-- Kantor Package -->
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="pricing">
                             <div class="pricing-title">
-                                 Kantor
+                                Kantor
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
-                                    
-                                    <div>Rp.5000,000</div>
+                                    <div>Rp 5.000.000</div>
                                     <div>per 3 Bulan</div>
                                 </div>
                                 <div class="pricing-details">
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran Di Tempat </div>
+                                        <div class="pricing-item-label">Pembelajaran Di Tempat</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
@@ -48,17 +48,24 @@
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                         <div class="pricing-item-label">Custom Materi</div>
-                                   
                                     </div>
                                 </div>
                             </div>
                             <div class="pricing-cta">
-
-                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Kantor', 'harga' => 5000000]) }}">
-                            Pesan <i class="fas fa-shopping-cart"></i></a>
+                                <!-- Form untuk melakukan pembayaran -->
+                                <form action="{{ route('form.bayar') }}" method="GET">
+                                    <input type="hidden" name="paket" value="Kantor">
+                                    <!-- Input harga format mata uang (readonly) -->
+                                    
+                                    <!-- Input tersembunyi untuk mengirimkan harga murni -->
+                                    <input type="hidden" name="harga"  value="5000000">
+                                    <button type="submit" class="btn btn-primary">Pesan <i class="fas fa-shopping-cart"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Private Package -->
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="pricing pricing-highlight">
                             <div class="pricing-title">
@@ -66,8 +73,7 @@
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
-                                    
-                                    <div>Rp.500.000</div>
+                                    <div>Rp 500.000</div>
                                     <div>per bulan</div>
                                 </div>
                                 <div class="pricing-details">
@@ -85,15 +91,20 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Jadwal senin-sabtu "waktu disesuaikan"</div>
+                                        <div class="pricing-item-label">Jadwal Senin-Sabtu "waktu disesuaikan"</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="pricing-cta">
-                            <a href="{{ route('pages.Pembayaran.redirectToFormBayar', ['paket' => 'Private', 'harga' => 500000]) }}">Pesan <i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
+                                <!-- Form untuk melakukan pembayaran -->
+                                <form action="{{ route('form.bayar') }}" method="GET">
+                                    <input type="hidden" name="paket" value="Private">
+                                    <!-- Input harga format mata uang (readonly) -->
+                                    
+                                    <!-- Input tersembunyi untuk mengirimkan harga murni -->
+                                    <input type="hidden" name="harga"  value="500000">
+                                    <button type="submit" class="btn btn-primary">Pesan <i class="fas fa-shopping-cart"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -104,7 +115,5 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-
-    <!-- Page Specific JS File -->
+   
 @endpush
