@@ -50,6 +50,17 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Judul_Materi</label>
+                                <input type="text" 
+                                    class="form-control @error('judul_materi') is-invalid @enderror"
+                                    name="judul_materi" value="{{ $lecturer->judul_materi }}">
+                                @error('judul_materi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Materi</label>
                                 <input type="url" 
                                     class="form-control @error('materi') is-invalid @enderror"
@@ -60,6 +71,7 @@
                                     </div>
                                 @enderror
                             </div>
+                           
                             <div class="form-group">
                                 <label>Jadwal</label>
                                 <input type="datetime-local" class="form-control @error('jadwal') is-invalid @enderror" 

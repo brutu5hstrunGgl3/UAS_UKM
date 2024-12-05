@@ -96,6 +96,9 @@ class TugasController extends Controller
         // Download file
         return response()->download($filePath, $tugas->file);
     }
+    
+    
+
 
     public function edit(Tugas $learning )
     {

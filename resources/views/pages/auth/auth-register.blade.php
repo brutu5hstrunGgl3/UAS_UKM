@@ -5,6 +5,7 @@
 @push('style')
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+   
 @endpush
 
 @section('main')
@@ -14,32 +15,33 @@
         </div>
 
         <div class="card-body">
-            <form method="POST">
+            <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
                 @csrf
                 <div class="row">
                     <div class="form-group col-12">
                         <label for="name">Name</label>
                         <input id="name" type="text"
-                            class="form-control @error('name')
-                            is-invalid
-                        @enderror"
-                            name="name" autofocus>
+                            class="form-control @error('name') is-invalid @enderror"
+                            name="name" autofocus required>
+                        <div class="invalid-feedback">
+                        Please fill in your name.
+                        </div>
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email"
-                        class="form-control @error('email')
-                        is-invalid
-                    @enderror"
-                        name="email">
+                        class="form-control @error('email') is-invalid @enderror"
+                        name="email" required>
+                    <div class="invalid-feedback">
+                    Please fill in your email.
+                    </div>
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -47,44 +49,68 @@
                     @enderror
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label for="password" class="d-block">Password</label>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
                         <input id="password" type="password"
-                            class="form-control @error('password')
-                            is-invalid
-                        @enderror"
-                            name="password">
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            class="form-control @error('password') is-invalid @enderror"
+                            name="password" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please fill in your password.
+                        </div>
                     </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="form-group col-12">
-                        <label for="password2" class="d-block">Password Confirmation</label>
-                        <input id="password2" type="password" class="form-control" name="password_confirmation">
-                    </div>
-                </div>
-                <div class="form-group mt-2 mb-2">
-                <img src="{{ captcha_src('math') }}" alt="captcha">
-                    
-                    <input type="text" name="captcha"
-                         class="form-control @error('captcha') is-invalid @enderror"
-                         placeholder="Enter Captcha">
-                    @error('captcha')
-
-                    <div class="invalid-feedback">{{ $message }}</div>
-
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
-
                 </div>
 
+                <div class="form-group">
+                    <label for="password2" class="d-block">Password Confirmation</label>
+                    <div class="input-group">
+                        <input id="password2" type="password"
+                            class="form-control @error('password_confirmation') is-invalid @enderror"
+                            name="password_confirmation" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please confirm your password.
+                        </div>
+                    </div>
+                    @error('password_confirmation')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+
+                <div class="form-group mt-2 mb-2">
+                    <label for="captcha">Captcha</label>
+                    <div class="mb-2">
+                        <img src="{{ captcha_src('mini') }}" alt="captcha">
+                    </div>
+                    <input type="text" name="captcha"
+                        class="form-control @error('captcha') is-invalid @enderror"
+                        placeholder="Enter Captcha" required>
+                    <div class="invalid-feedback">
+                        Please fill in the captcha.
+                    </div>
+                    @error('captcha')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -97,10 +123,36 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-    <script src="{{ asset('library/jquery.pwstrength/jquery.pwstrength.min.js') }}"></script>
+    <script>
+        // Toggle Password Visibility
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function () {
+                const passwordInput = this.closest('.input-group').querySelector('input');
+                const icon = this.querySelector('i');
 
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/auth-register.js') }}"></script>
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Bootstrap Form Validation
+        (function () {
+            'use strict';
+            const form = document.querySelector('.needs-validation');
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        })();
+    </script>
 @endpush

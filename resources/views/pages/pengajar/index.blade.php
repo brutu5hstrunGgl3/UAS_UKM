@@ -12,8 +12,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
+            <h1>Learning Module System</h1>
                 @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-                    <h1>Learning Module System</h1>
+                   
                     <div class="section-header-button">
                         <a href="{{ route('lecturer.create') }}" class="btn btn-primary">Tambah Pemateri</a>
                     </div>
@@ -22,17 +23,7 @@
 
             @include('layouts.alert')
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-0">
-                        <div class="card-body">
-                            <ul class="nav nav-pills">
-                                <!-- Nav Pills can be added here if needed -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class="row mt-4">
                 <div class="col-12">
@@ -47,7 +38,7 @@
                             <div class="float-right">
                                 <form method="GET" action="{{ route('lecturer.index') }}">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="name">
+                                        <input type="text" class="form-control" placeholder="Search" name="judul_materi">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary">
                                                 <i class="fas fa-search"></i>
@@ -65,9 +56,12 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Position</th>
-                                            <th>Materi</th>
+                                            <th>Judul Materi</th>
+                                            <th>Link Materi</th>
                                             <th>Jadwal</th>
+                                            @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                                             <th>Action</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +69,7 @@
                                             <tr>
                                                 <td>{{ $lecturer->name }}</td>
                                                 <td>{{ $lecturer->position }}</td>
+                                                <td> {{$lecturer->judul_materi}}</td>
                                                 <td>
                                                     <a href="{{ $lecturer->materi }}" class="url" style="color: gray; text-decoration: none;">
                                                         {{ $lecturer->materi }}
@@ -82,12 +77,7 @@
                                                 </td>
                                                 <td>{{ $lecturer->jadwal }}</td>
                                                 <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        @if(auth()->user()->rul == 'PESERTA')
-                                                            <a href="" class="btn btn-sm btn-info btn-icon">
-                                                                <i class="fas fa-edit"></i> Absen
-                                                            </a>
-                                                        @endif
+                                                    
 
                                                         @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                                                             <a href="{{ route('lecturer.edit', $lecturer->id) }}" class="btn btn-sm btn-info btn-icon mr-2">

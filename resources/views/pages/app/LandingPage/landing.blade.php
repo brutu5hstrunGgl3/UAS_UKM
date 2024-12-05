@@ -5,66 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer 77 - Bimbel Online Komputer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * /* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        /* Header Styles */
-        .header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            padding: 20px;
-            color: white;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg, #0033cc, #3366ff, #6699ff); /* Gradasi biru laut */
+    padding: 20px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan halus */
+}
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+/* Navigation Styles */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Lebar maksimal untuk navigasi */
+    margin: 0 auto; /* Tengah-kan kontainer nav */
+}
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+/* Logo Style */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: background 0.3s;
-        }
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 20px; /* Jarak antar tautan */
+}
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background 0.3s; /* Efek transisi untuk hover */
+}
+
+/* .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Efek hover dengan latar belakang putih transparan */
+
+
+/* Navigation Bar Background */
+
+
+/* Navigation Links in Navbar */
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease-in-out; /* Efek transisi untuk warna */
+}
+
+nav a:hover {
+    color: #ffcc00; /* Warna hover kuning lembut */
+}
+
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600') center/cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-            margin-top: 60px;
-        }
+    .hero {
+    background: linear-gradient(135deg, #0033cc, #3366ff, #6699ff); /* Gradasi biru ke biru langit */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    margin-top: 60px;
+}
 
         .hero-content {
             max-width: 800px;
@@ -154,7 +176,7 @@
         /* Contact Form */
         .contact {
             padding: 80px 20px;
-            background: #1e3c72;
+            background: linear-gradient(135deg, #0033cc, #3366ff, #6699ff); 
             color: white;
         }
 
@@ -349,6 +371,7 @@
                 <a href="#testimoni">Testimoni</a>
                 <a href="#kontak">Kontak</a>
                 <a href="#tentang-kami">Tentang Kami</a>
+              
             </div>
         </nav>
     </header>
@@ -357,7 +380,7 @@
         <div class="hero-content">
             <h1>Belajar Komputer Jadi Lebih Mudah</h1>
             <p>Tingkatkan kemampuan komputermu bersama mentor berpengalaman melalui pembelajaran online yang interaktif</p>
-            <a href="{{route('register')}}" class="cta-button">Mulai Belajar Sekarang</a>
+            <a href="{{route('login')}}" class="cta-button">Mulai Belajar Sekarang</a>
         </div>
     </section>
 
@@ -416,7 +439,7 @@
                     <div class="stat-label">Mentor Profesional</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">4+</div>
+                    <div class="stat-number">4-+</div>
                     <div class="stat-label">Program Kursus</div>
                 </div>
                 <div class="stat-item">
@@ -426,7 +449,7 @@
             </div>
         </div>
         <div class="about-image">
-            <img src="logo-bimbel.jfif" alt="Tim Bimbel 77">
+            <img src="{{ asset('img/komputer 77.jpg') }}" alt="Tim Bimbel 77">
         </div>
     </div>
 </section>

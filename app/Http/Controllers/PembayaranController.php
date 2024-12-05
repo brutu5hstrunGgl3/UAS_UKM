@@ -3,11 +3,13 @@
 // app/Http/Controllers/PembayaranController.php
 namespace App\Http\Controllers;
 
+use App\Exports\PembayaranExport;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+//excel
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
@@ -47,7 +49,7 @@ class PembayaranController extends Controller
             'email' => 'required|email|max:255',
             'jenis_paket' => 'required|string|max:255',
             'harga' => 'required|numeric',
-            'tanggal_pembayaran' => 'required|date',
+            
             'struk' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
         ]);
 
@@ -66,7 +68,8 @@ class PembayaranController extends Controller
             'jenis_paket' => $request->jenis_paket,
             'harga' => $request->harga,
             'status' => 'Belum Bayar',
-            'tanggal_pembayaran' => $request->tanggal_pembayaran,
+            'tanggal_pembayaran' => now(),
+
             'struk' => $filePath ?? null,
             'user_id' => Auth::id(), // Menyimpan path file jika ada
             
@@ -105,6 +108,28 @@ public function update(Request $request, Pembayaran $pembayaran)
     return redirect()->route('pembayaran.index')->with('success', 'Data berhasil diperbarui.');
 }
 
+public function download($id)
+{
+    
+    $pembayaran = Pembayaran::find($id);
+
+    
+    if (!$pembayaran) {
+        return redirect()->route('pembayaran.index')->with('error', 'Struk tidak ditemukan.');
+    }
+
+    // Dapatkan path file dari storage
+    $filePath = storage_path('app/public/struk/' . $pembayaran->file);
+
+    // Periksa apakah file benar-benar ada
+    if (!file_exists($filePath)) {
+        return redirect()->route('pembayaran.index')->with('error', 'File tidak ditemukan di server.');
+    }
+
+    // Download file
+    return response()->download($filePath, $pembayaran->file);
+}
+
 
 
     public function destroy(Pembayaran $pembayaran)
@@ -113,5 +138,13 @@ public function update(Request $request, Pembayaran $pembayaran)
        
        return redirect()->route('pembayaran.index')->with('success', 'Data anda berhasil di hapus');
     }
+
+    public function export()
+{
+    return Excel::download(new PembayaranExport, 'cutis.xlsx');
+}
+
+
+ 
 }
 

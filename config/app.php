@@ -130,6 +130,7 @@ return [
         // ...
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Request' => Illuminate\Support\Facades\Request::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ]
 
   

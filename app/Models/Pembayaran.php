@@ -29,6 +29,8 @@ class Pembayaran extends Model
         return $this->belongsTo(User::class, 'user_id', 'id'); // Menggunakan user_id sebagai foreign key
     }
 
+   
+
 //   public function user()
 //   {
 //       return $this->belongsTo(User::class);

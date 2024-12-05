@@ -38,6 +38,11 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+        ], [
+            'password.required' => 'Password diperlukan.',
+            'password.min' => 'Password harus memiliki minimal 8 karakter.',
+            'password.regex' => 'Password harus mengandung huruf kecil, huruf besar, angka, dan simbol.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ])->validate();
 
         return User::create([

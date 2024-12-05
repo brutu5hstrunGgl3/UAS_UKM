@@ -17,14 +17,14 @@ class LecturerController extends Controller
 
     {
         $lecturers = DB::table('lecturers')
-        ->when($request->input('name'), function ($query, $name) {
-            return $query->where('name', 'like', '%' . $name . '%');
+        ->when($request->input('judul_materi'), function ($query, $judul_materi) {
+            return $query->where('judul_materi', 'like', '%' . $judul_materi . '%');
         })
         //->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
         ->orderBy('created_at', 'desc')
         ->paginate(10);
         return view('pages.pengajar.index', compact('lecturers'));
-
+        dd($lecturers);
         
     }
 
@@ -41,6 +41,7 @@ class LecturerController extends Controller
             'name' => $request['name'],
             'position' => $request['position'],
             'materi' => $request['materi'],
+            'judul_materi' => $request['judul_materi'],
             'jadwal' => $request['jadwal'],
             
             

@@ -26,6 +26,7 @@ class StoreLecturerRequest extends FormRequest
             'position' => 'required',
             'materi' => 'required|url',
             'jadwal' => 'date_format:Y-m-d\TH:i',
+            'judul_materi' => 'required',
             
 
         ];

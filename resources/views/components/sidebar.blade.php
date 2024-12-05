@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Learning module sistem</a>
+            <a href="{{route('home')}}">Learning module sistem</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">Course</a>
@@ -56,22 +56,20 @@
                         </ul>
                     </li>
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link text-danger">Anda belum menyelesaikan pembayaran atau belum divalidasi oleh admin.</a>
-                    </li>
+                <li class="nav-item">
+                <a  class="nav-link text-muted" href ="{{ route('pages.Pembayaran.paket')}}">
+                    <i class="fas fa-lock"></i><span>Materi (Terkunci)</span>
+                </a>
+            </li>
                 @endif
             @endif
 
             {{-- Menu untuk ADMIN dan PEMATERI - Absensi --}}
             @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-list"></i><span>Absensi</span>
-                </a>
+               
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="{{ route('absensi.index') }}">Absensi peserta</a>
-                    </li>
+                   
                 </ul>
             </li>
             @endif
@@ -90,12 +88,32 @@
 
                     <li>
     {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
+
     @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Sudah Bayar')
         <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
     @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
         <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
+
+   
     @endif
+    
+    
+</li>
+
+<li>
+    {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
+
+    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Sudah Bayar')
+        <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
+    {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
+    @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+    <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
+    @endif
+    @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+    <a class="nav-link" href="{{ route('kumpul.index') }}">Tugas Peserta</a>
+@endif
+    
 </li>
                 </ul>
             </li>
@@ -140,11 +158,11 @@
             @if(auth()->user()->rul == 'PESERTA')
             <li class="nav-item dropdown">
                 <a class="nav-link has-dropdown" href="">
-                    <i class="fas fa-shopping-cart"></i><span>Transaksi</span>
+                    <i class="fas fa-shopping-cart"></i><span>History Transaksi</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="{{ route('pages.Pembayaran.paket') }}">Bimbel</a>
+                        <a class="nav-link" href="">Pembayaran</a>
                     </li>
                 </ul>
             </li>

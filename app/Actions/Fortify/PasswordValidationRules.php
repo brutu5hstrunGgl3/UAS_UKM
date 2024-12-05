@@ -13,6 +13,15 @@ trait PasswordValidationRules
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        return [
+            'required', 
+            'string', 
+            'min:8', // Minimum 8 karakter
+            'regex:/[a-z]/', // Harus ada huruf kecil
+            'regex:/[A-Z]/', // Harus ada huruf besar
+            'regex:/[0-9]/', // Harus ada angka
+            'regex:/[@$!%*?&#]/',
+            'confirmed'
+            ];
     }
 }

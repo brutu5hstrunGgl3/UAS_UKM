@@ -62,9 +62,9 @@
                                                     <td>
                                                         @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                                                             <div class="d-flex">
-                                                                <a href="{{route('tugas.edit', $tugasItem->learning) }}" class="btn btn-sm btn-info mr-1">
+                                                                <!-- <a href="{{route('tugas.edit', $tugasItem->learning) }}" class="btn btn-sm btn-info mr-1">
                                                                     <i class="fas fa-edit"></i> Edit
-                                                                </a>
+                                                                </a> -->
                                                                 <form onsubmit="return confirm('Are you sure?');" method="POST" action="{{ route('tugas.destroy', $tugasItem->learning) }}">
                                                                     @csrf
                                                                     @method('DELETE')

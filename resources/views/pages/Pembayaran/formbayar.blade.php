@@ -9,6 +9,35 @@
             <div class="section-header">
                 <h1>Form Pembayaran</h1>
             </div>
+           
+            <div class="section-body">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="payment-method-info">
+                    <div class="images">
+                                            <img src="{{ asset('img/payment/visa.png') }}"
+                                                alt="visa">
+                                            <img src="{{ asset('img/payment/mastercard.png') }}"
+                                                alt="mastercard">
+                                            
+                                        </div>
+                                        <div></div>
+    
+        <!-- Menambahkan ikon BRI di sebelah kiri nomor rekening -->
+       
+        <p>
+            <h4>Metode Pembayaran: Transfer rekening BRI</h4>
+        </p>
+    </div>
+
+    <div class="d-flex align-items-center">
+        <!-- Menambahkan ikon Visa di sebelah kiri nomor rekening -->
+       
+        <p>
+            <h3>Nomor Rekening: 500601035093536 (A/N Rosmayanti Tinti)</h3>
+        </p>
+    </div>
+</div>
 
             <div class="section-body">
                 <div class="card">
@@ -59,10 +88,10 @@
                                 <!-- Hidden input untuk menyimpan harga dalam format angka -->
                                 <input type="hidden" name="harga" value="{{$harga }}">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
                                 <input type="date" name="tanggal_pembayaran" class="form-control" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="struk">Bukti Struk Transfer</label>
                                 <input type="file"   class="form-control @error('struk') is-invalid @enderror"name="struk" class="form-control" accept="image/*,application/pdf">
@@ -73,9 +102,18 @@
                                     </div>
                                     @enderror
                             </div>
-                            <div class="text-md-left">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
+                            <div class="text-md-right">
+                        <div class="float-lg-left mb-lg-0 mb-3">
+                            <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process
+                                Pembayaran</button>
+                                <a href="{{ route('pages.Pembayaran.paket') }}" class="btn btn-danger btn-icon icon-left">
+    <i class="fas fa-times"></i> Cancel
+</a>
+                        </div>
+                        <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                </div>
+            </div>
                         </form>
                     </div>
                 </div>

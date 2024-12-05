@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\PembayaranExport;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\AttendanceController;
 use Mews\Captcha\CaptchaController;
@@ -11,6 +12,8 @@ use App\Http\Middleware\Pemateri;
 use App\Http\Middleware\Peserta;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\KumpulTugasController;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -24,37 +27,25 @@ Route::get('/', function () {
     return view('pages.app.LandingPage.landing');
 });
 
-
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('tugas', TugasController::class);
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
-    
     Route::get('/tugas/download/{learning}', [TugasController::class, 'download'])->name('tugas.download');
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/captcha-refresh', [CaptchaController::class, 'refresh']);
-
     Route::get('/home', function () {
-        return view('pages.app.dashboard_lms');
-        
+    return view('pages.app.dashboard_lms');    
     })->name('home');
     
     // Route::resource('user', UserController::class);
     Route::resource('lecturer', LecturerController::class);
-
     Route::get('/bayar', function () {
         return view('pages.Pembayaran.paket');
- })->name('pages.Pembayaran.paket');
-
- Route::post('/form', function () {
+    })->name('pages.Pembayaran.paket');
+ 
+    Route::post('/form', function () {
     return view('pages.Pembayaran.formbayar');
-})->name('pages.Pembayaran.formbayar');
-
-//  Route::get('/invoice', function () {
-//     return view('pages.Pembayaran.invoice');
-// })->name('pages.Pembayaran.invoice');
-    
-    // Route::resource('absensi', AttendanceController::class);
-   
+    })->name('pages.Pembayaran.formbayar');
 
     Route::get('/profil', function () {
         return view('pages.Profile.UserProfile'); 
@@ -90,12 +81,37 @@ Route::post('/pembayaran/store', [PembayaranController::class, 'storePembayaran'
 Route::delete('/pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 Route::get('/pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
 Route::put('/pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+Route::get('/pembayaran/download/{id}', [PembayaranController::class, 'download'])->name('pembayaran.download');
 
 Route::group(['middleware' => ['auth', 'Peserta']], function() {
     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
     Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
     
  });
+
+ Route::get('/Pembayaran/export', function () {
+    return Excel::download(new PembayaranExport, 'Pembayaran.xlsx');
+})->name('Pembayaran.export');
+
+//Route::middleware(['auth', 'Admin'])->group(function () {
+    Route::resource('kumpul', KumpulTugasController::class)->only([ 'index','store', 'create', 'destroy']);
+//});
+
+// Route::middleware(['auth', 'Admin','Pemateri'])->group(function () {
+//     Route::resource('kumpul', KumpulTugasController::class)->only(['index']);
+// });
+
+//Route::('kumpul/create', [KumpulTugasController::class, 'create'])->name('kumpul.create');
+
+Route::get('kumpul/download/{id}', [KumpulTugasController::class, 'download'])->name('kumpul.download');
+
+Route::middleware('auth', Admin::class)->group(function () {
+    Route::get('tugas/create', [TugasController::class, 'create'])->name('tugas.create');
+    Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
+});
+// Route::get('/kumpul', function () {
+//     return view('pages.tugas.tugas');
+//  })->name('/kumpul');
 
 
 

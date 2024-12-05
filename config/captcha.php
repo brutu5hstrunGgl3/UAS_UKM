@@ -35,7 +35,7 @@ return [
         'length' => 5,
         'width' => 150,
         'height' => 50,
-        'invert' => true,
+        'invert' => false,
     ],
     'inverse' => [
         'length' => 5,
@@ -46,7 +46,7 @@ return [
         'angle' => 12,
         'sharpen' => 0,
         'blur' => 0,
-        'invert' => true,
+        'invert' => false,
         'contrast' => 0,
     ]
 ];
