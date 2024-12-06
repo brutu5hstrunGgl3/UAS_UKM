@@ -109,10 +109,10 @@ Route::middleware('auth', Admin::class)->group(function () {
     Route::get('tugas/create', [TugasController::class, 'create'])->name('tugas.create');
     Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
 });
-// Route::get('/kumpul', function () {
-//     return view('pages.tugas.tugas');
-//  })->name('/kumpul');
 
+Route::get('/nilai', function () {
+    return view('pages.nilai.index');
+})->name('pages.nilai.index');
 
 
 // Route::get('/test', function () {
