@@ -108,10 +108,11 @@
                                             <td>
                                                
                                             <div class="d-flex justify-content-center">
-                                            <a href="{{route('pembayaran.download')}}" class="btn btn-sm btn-primary">
+                                            <a href="{{route('formbayar.download',$pembayaran->id)}}" class="btn btn-sm btn-primary">
                                                                     <i class="fas fa-download"></i> Download
                                                                 </a>
-                                                         <a href=" {{ route('pembayaran.edit', $pembayaran->id) }}"
+                                                                
+                                                         <a href="{{route('pembayaran.edit', $pembayaran->id)}}"
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit

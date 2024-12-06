@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 //excel
 use Maatwebsite\Excel\Facades\Excel;
+//log
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
@@ -41,7 +44,7 @@ class PembayaranController extends Controller
         return view('pages.Pembayaran.formbayar');
     }
 
-    public function storePembayaran(Request $request)
+    public function StorePembayaranRequest(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -49,15 +52,16 @@ class PembayaranController extends Controller
             'email' => 'required|email|max:255',
             'jenis_paket' => 'required|string|max:255',
             'harga' => 'required|numeric',
-            
             'struk' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
         ]);
 
         
         // Menyimpan file bukti pembayaran jika ada
-        if ($request->hasFile('struk')) {
-            $filePath = $request->file('struk')->store('uploads/struk', 'public'); // Menyimpan file di folder public/uploads/struk
-        }
+        $struk = null;
+        $struk = $request->file('struk')->getClientOriginalName();
+        $struk = $request->file('struk')->store('public/STRUK');
+        
+        
      
         
 
@@ -69,8 +73,7 @@ class PembayaranController extends Controller
             'harga' => $request->harga,
             'status' => 'Belum Bayar',
             'tanggal_pembayaran' => now(),
-
-            'struk' => $filePath ?? null,
+            'struk' => $struk ? str_replace('public/', '', $struk) : null,
             'user_id' => Auth::id(), // Menyimpan path file jika ada
             
         ]);
@@ -110,25 +113,38 @@ public function update(Request $request, Pembayaran $pembayaran)
 
 public function download($id)
 {
-    
+  
+    // Cari data pembayaran berdasarkan ID
     $pembayaran = Pembayaran::find($id);
-
     
+    // Jika data tidak ditemukan
     if (!$pembayaran) {
         return redirect()->route('pembayaran.index')->with('error', 'Struk tidak ditemukan.');
     }
 
+    // Periksa apakah kolom struk memiliki nilai
+    if (!$pembayaran->struk) {
+        return redirect()->route('pembayaran.index')->with('error', 'Struk belum diunggah.');
+    }
+
     // Dapatkan path file dari storage
-    $filePath = storage_path('app/public/struk/' . $pembayaran->file);
+    $filePath = storage_path('app/public/STRUK/' . basename($pembayaran->struk));
+
+
+    // dd($pembayaran->struk);
 
     // Periksa apakah file benar-benar ada
     if (!file_exists($filePath)) {
+        Log::error("File tidak ditemukan: {$filePath}");
         return redirect()->route('pembayaran.index')->with('error', 'File tidak ditemukan di server.');
     }
 
     // Download file
     return response()->download($filePath, $pembayaran->file);
+
+    
 }
+
 
 
 
@@ -141,7 +157,7 @@ public function download($id)
 
     public function export()
 {
-    return Excel::download(new PembayaranExport, 'cutis.xlsx');
+    return Excel::download(new PembayaranExport, 'Pembayaran.xlsx');
 }
 
 

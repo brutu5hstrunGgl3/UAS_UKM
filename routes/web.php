@@ -77,11 +77,11 @@ Route::middleware(Peserta::class)->group(function () {
     
 });
 Route::get('/form.bayar', [PembayaranController::class, 'showForm'])->name('form.bayar');
-Route::post('/pembayaran/store', [PembayaranController::class, 'storePembayaran'])->name('pembayaran.store');
+Route::post('/bayar', [PembayaranController::class, 'StorePembayaranRequest'])->name('pembayaran.store');
 Route::delete('/pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 Route::get('/pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
 Route::put('/pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
-Route::get('/pembayaran/download/{id}', [PembayaranController::class, 'download'])->name('pembayaran.download');
+Route::get('/formbayar/download/{id}', [PembayaranController::class, 'download'])->name('formbayar.download');
 
 Route::group(['middleware' => ['auth', 'Peserta']], function() {
     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
