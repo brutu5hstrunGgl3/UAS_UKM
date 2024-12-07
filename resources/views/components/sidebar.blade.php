@@ -126,7 +126,7 @@
                 <ul class="dropdown-menu">
                     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                     <li>
-                        <a class="nav-link" href="{{route('pages.nilai.index')}}">Input Nilai</a>
+                        <a class="nav-link" href="{{route('nilai.index')}}">Input Nilai</a>
                     </li>
                     @endif
                     @if(auth()->user()->rul == 'ADMIN')

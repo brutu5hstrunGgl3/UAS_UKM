@@ -17,8 +17,14 @@ class nilai extends Model
         'name',      // Nama peserta
         'kehadiran', // Status kehadiran
         'kompetensi',// Kompetensi yang dinilai
-        'skill',     // Skill yang dimiliki
+        'skill', 
+        'status',    // Skill yang dimiliki
             // Nama file struk (jika ada)
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

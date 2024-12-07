@@ -22,11 +22,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-0">
-                            <div class="card-body">
-                                <ul class="nav nav-pills">
-                                    <!-- Jika ada menu di sini, tambahkan item menu -->
-                                </ul>
-                            </div>
+                            <ul class="nav nav-pills">
+                                <!-- Jika ada menu di sini, tambahkan item menu -->
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -35,17 +33,34 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>Import File Nilai</h4>
                             </div>
                             <div class="card-body">
-                                <div class="float-left">
-                                    <a href="" class="btn btn-primary mr-2">Create</a> <!-- Tombol Create -->
-                                </div>
-                                <a href="" class="btn btn-success">Export to Excel</a>
-                                <div class="clearfix mb-3"></div>
+                                <form action="{{ route('nilai.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-start mb-2">
+                                    @csrf
+                                    <div class="form-group mb-2">
+                                        <label for="file" class="sr-only">Upload File Tugas Anda:</label>
+                                        <input type="file" id="file" name="file" class="form-control-file" accept=".xls,.xlsx" required>
+                                        @error('file')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="d-flex">
+        <button type="submit" class="btn btn-primary btn-icon icon-left">
+            <i class="fas fa-upload"></i> Upload File Nilai 
+        </button>
+        <a href="{{ route('dashboard') }}" class="btn btn-danger btn-icon icon-left ml-2">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </div>
+</a>
+                                </form>
+                            </div>
 
-                                <div class="float-right">
-                                    <form method="GET" action="">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div></div> <!-- Untuk menjaga keseimbangan, bisa diisi jika ada konten lain di kiri -->
+                                    <form method="GET" action="{{ route('nilai.index') }}" class="ml-auto">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="name">
                                             <div class="input-group-append">
@@ -68,13 +83,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user)
+                                            @foreach ($nilais as $nilai)
                                                 <tr>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td><!-- Kehadiran Data --></td>
-                                                    <td><!-- Kompetensi Data --></td>
-                                                    <td><!-- Skill Data --></td>
-                                                    <td><!-- Status Data --></td>
+                                                    <td>{{ $nilai->name }}</td>
+                                                    <td>{{ $nilai->kehadiran }}</td>
+                                                    <td>{{ $nilai->kompetensi }}</td>
+                                                    <td>{{ $nilai->skill }}</td>
+                                                    <td>{{ $nilai->status }}</td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="" class="btn btn-sm btn-primary">
@@ -83,8 +98,7 @@
                                                             <a href="" class="btn btn-sm btn-info btn-icon">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </a>
-
-                                                            <form onclick="return confirm('Are you sure?')" class="d-inline" action="" method="POST">
+                                                            <form onclick="return confirm('Are you sure?')" class="d-inline" action="{{ route('nilai.destroy', $nilai->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-sm btn-danger btn-icon confirm-delete">
@@ -97,6 +111,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    <div class="float-right">
+                                        {{ $nilais->withQueryString()->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

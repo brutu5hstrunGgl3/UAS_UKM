@@ -116,6 +116,11 @@ Route::resource('nilai', NilaiController::class)->names(['index' => 'pages.nilai
 
 Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');});
+    Route::post('/nilai/import', [NilaiController::class, 'import'])->name('nilai.import');
+    Route::resource('nilai', NilaiController::class);
+
+  
+
 
 // Route::get('/dashboaradmin', function () {
 //     return view('pages.app.dashboard_admin');
