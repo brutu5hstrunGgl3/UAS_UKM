@@ -60,5 +60,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Pembayaran::class, 'user_id', 'id'); // Menggunakan user_id di tabel pembayarans
     }
+
+    public function nilai()
+{
+    return $this->hasMany(Nilai::class, 'user_id', 'id'); // Menghubungkan id di tabel users ke user_id di tabel nilai
+}
     
 }

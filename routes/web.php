@@ -13,7 +13,9 @@ use App\Http\Middleware\Peserta;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\KumpulTugasController;
+use App\Http\Controllers\NilaiController;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\DashboardAdminController;
 
 
 
@@ -110,9 +112,14 @@ Route::middleware('auth', Admin::class)->group(function () {
     Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
 });
 
-Route::get('/nilai', function () {
-    return view('pages.nilai.index');
-})->name('pages.nilai.index');
+Route::resource('nilai', NilaiController::class)->names(['index' => 'pages.nilai.index']);
+
+Route::middleware(['auth', 'Admin'])->group(function () {
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');});
+
+// Route::get('/dashboaradmin', function () {
+//     return view('pages.app.dashboard_admin');
+// })->name('pages.app.dashboard_admin');
 
 
 // Route::get('/test', function () {

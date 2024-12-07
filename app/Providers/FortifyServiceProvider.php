@@ -87,3 +87,16 @@ class FortifyServiceProvider extends ServiceProvider
 
     }
 }
+
+    Fortify::redirects('login', function () {
+        $user = Auth::user();
+    
+        if ($user->rul === 'ADMIN' || $user->rul === 'PEMATERI') {
+            return '/dashboard'; // Dashboard untuk admin dan pemateri
+        }
+    
+        return '/home'; // Default untuk role lain
+    });
+
+
+
