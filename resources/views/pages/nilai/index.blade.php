@@ -36,7 +36,7 @@
                                 <h4>Import File Nilai</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('nilai.import') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-start mb-2">
+                                <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-start mb-2">
                                     @csrf
                                     <div class="form-group mb-2">
                                         <label for="file" class="sr-only">Upload File Tugas Anda:</label>
@@ -83,22 +83,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($nilais as $nilai)
+                                            @foreach ($users as $user)
                                                 <tr>
-                                                    <td>{{ $nilai->name }}</td>
-                                                    <td>{{ $nilai->kehadiran }}</td>
-                                                    <td>{{ $nilai->kompetensi }}</td>
-                                                    <td>{{ $nilai->skill }}</td>
-                                                    <td>{{ $nilai->status }}</td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->kehadiran }}</td>
+                                                    <td>{{ $user->kompetensi }}</td>
+                                                    <td>{{ $user->skill }}</td>
+                                                    <td>{{ $user->status }}</td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="" class="btn btn-sm btn-primary">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
-                                                            <a href="" class="btn btn-sm btn-info btn-icon">
+                                                            <a href="{{ route('nilai.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </a>
-                                                            <form onclick="return confirm('Are you sure?')" class="d-inline" action="{{ route('nilai.destroy', $nilai->id) }}" method="POST">
+                                                            <form onclick="return confirm('Are you sure?')" class="d-inline" action="{{ route('nilai.destroy', $user->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-sm btn-danger btn-icon confirm-delete">
@@ -112,7 +112,7 @@
                                         </tbody>
                                     </table>
                                     <div class="float-right">
-                                        {{ $nilais->withQueryString()->links() }}
+                                        {{ $users->withQueryString()->links() }}
                                     </div>
                                 </div>
                             </div>

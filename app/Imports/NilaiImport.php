@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\nilai;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 //log
 use Illuminate\Support\Facades\Log;
 
@@ -18,14 +19,14 @@ class NilaiImport implements ToModel
     public function model(array $row)
     {
 
-        Log::info('Impor data: ', $row);
+        // Log::info('Impor data: ', $row);
         return new nilai([
-            'user_id' => $row[0], // Misalkan ID user ada di kolom pertama
-            'name' => $row[1], // Misalkan nama ada di kolom kedua
-            'kehadiran' => $row[2], // Misalkan kehadiran ada di kolom ketiga
-            'kompetensi' => $row[3], // Misalkan kompetensi ada di kolom keempat
-            'skill' => $row[4], // Misalkan skill ada di kolom kelima
-            'status' => $row[5], // Misalkan status ada di kolom keenam
+            'user_id' => Auth::user()->id, // ID pengguna yang terautentikasi
+            'name' => Auth::user()->name, // Nama pengguna yang terautentikasi
+            'kehadiran' => $row[1], // Misalkan kolom kehadiran ada di kolom kedua
+            'kompetensi' => $row[2],
+            'skill' => $row[3],
+            'status' => $row[4], // Misalkan status ada di kolom keenam
         ]);
     }
 }

@@ -9,27 +9,55 @@ use App\Http\Requests\StoreNilaiRequest;
 use Illuminate\Support\Facades\DB;
 use App\Imports\NilaiImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
+//auth
+
 
 class NilaiController extends Controller
 {
     //index
     public function index(Request $request)
     {
-        // Ambil semua pengguna dari database
-        $nilais = nilai::with('user')->orderBy('id', 'desc')->paginate(10);
-       return view('pages.nilai.index', compact('nilais'));
+         $users = User::where('rul', 'PESERTA')
+         ->paginate(10)
+         ->withQueryString();
+    // dd($nilais); // Untuk melihat data yang diambil
+    return view('pages.nilai.index', compact('users'));
+    }
 
+// return view('pages.nilai.index', compact('nilais'));
+public function edit(Request $request)
+{
+    // $user = \App\Models\User::findOrFail($id);
+    return view('pages.nilai.edit')->with('nilai', $request);
+    
+}
        
-    }
+    
 
-    public function create()
+    public function update(Request $request, $id)
     {
-        $users = User::where('rul', 'PESERTA')->get(); // Pastikan ini sesuai dengan kondisi yang Anda inginkan
-
-        // Mengirim variabel $users ke view
-        return view('pages.nilai.create', compact('users'));
+        $request->validate([
+            'kehadiran' => 'nullable|integer',
+            'kompetensi' => 'nullable|string',
+            'skill' => 'nullable|string',
+            'status' => 'nullable|string',
+        ]);
+    
+        // Cari data nilai berdasarkan ID
+        $nilai = nilai::findOrFail($id);
+    
+        // Update data
+        $nilai->update([
+            'kehadiran' => $request->input('kehadiran'),
+            'kompetensi' => $request->input('kompetensi'),
+            'skill' => $request->input('skill'),
+            'status' => $request->input('status'),
+        ]);
+    
+        return redirect()->route('nilai.index')->with('success', 'Data nilai berhasil diperbarui.');
     }
-
+    
 
     public function store(StoreNilaiRequest $request)
 {
@@ -55,34 +83,18 @@ class NilaiController extends Controller
     return redirect()->route('nilai.create')->with('success', 'Data berhasil disimpan.');
 }
 
-public function import(Request $request)
+public function destroy(nilai $users)
 {
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv',
-    ]);
-
-    Excel::import(new NilaiImport, $request->file('file'));
-
-    return redirect()->route('nilai.index')->with('success', 'Data berhasil diimpor.');
-}
-
-public function show($id)
-{ 
-    
-    $nilais = nilai::findOrFail($id); // Mengambil data nilai berdasarkan ID
-
-    return view('nilai.index', compact('nilais')); // Mengirim data ke view
-}
-
-public function destroy($id)
-{
-    $nilai = nilai::findOrFail($id); // Cari data berdasarkan ID atau tampilkan error jika tidak ditemukan
-    $nilai->delete(); // Hapus data
+   
+    $users->delete(); // Hapus data
 
     return redirect()->route('nilai.index')->with('success', 'Data berhasil dihapus.');
 }
 
-
+public function model(array $row)
+{
+    dd($row); // Lihat data yang diterima dari Excel
+}
 
 
     
