@@ -112,12 +112,14 @@ Route::middleware('auth', Admin::class)->group(function () {
     Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
 });
 
-Route::resource('nilai', NilaiController::class)->names(['index' => 'pages.nilai.index']);
+
 
 Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');});
    
-    Route::resource('nilai', NilaiController::class)->names(['edit','update']);
+    Route::resource('nilai', NilaiController::class);
+    
+
 
    
     

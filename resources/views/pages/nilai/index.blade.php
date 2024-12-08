@@ -95,7 +95,8 @@
                                                             <a href="" class="btn btn-sm btn-primary">
                                                                 <i class="fas fa-download"></i> Download
                                                             </a>
-                                                            <a href="{{ route('nilai.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon">
+                                                            
+                                                            <a href="{{ route('nilai.create', $user->id) }}" class="btn btn-sm btn-info btn-icon">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </a>
                                                             <form onclick="return confirm('Are you sure?')" class="d-inline" action="{{ route('nilai.destroy', $user->id) }}" method="POST">

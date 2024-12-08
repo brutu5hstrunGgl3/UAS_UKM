@@ -25,37 +25,10 @@ class NilaiController extends Controller
     return view('pages.nilai.index', compact('users'));
     }
 
-// return view('pages.nilai.index', compact('nilais'));
-public function edit(Request $request)
-{
-    // $user = \App\Models\User::findOrFail($id);
-    return view('pages.nilai.edit')->with('nilai', $request);
-    
-}
-       
-    
-
-    public function update(Request $request, $id)
+    public function create(Request $request, $id)
     {
-        $request->validate([
-            'kehadiran' => 'nullable|integer',
-            'kompetensi' => 'nullable|string',
-            'skill' => 'nullable|string',
-            'status' => 'nullable|string',
-        ]);
-    
-        // Cari data nilai berdasarkan ID
-        $nilai = nilai::findOrFail($id);
-    
-        // Update data
-        $nilai->update([
-            'kehadiran' => $request->input('kehadiran'),
-            'kompetensi' => $request->input('kompetensi'),
-            'skill' => $request->input('skill'),
-            'status' => $request->input('status'),
-        ]);
-    
-        return redirect()->route('nilai.index')->with('success', 'Data nilai berhasil diperbarui.');
+        $user = User::findOrFail($id);
+        return view('pages.nilai.create', compact('user'));
     }
     
 
@@ -91,10 +64,7 @@ public function destroy(nilai $users)
     return redirect()->route('nilai.index')->with('success', 'Data berhasil dihapus.');
 }
 
-public function model(array $row)
-{
-    dd($row); // Lihat data yang diterima dari Excel
-}
+
 
 
     
