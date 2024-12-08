@@ -85,11 +85,12 @@
                                         <tbody>
                                             @foreach ($users as $user)
                                                 <tr>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->kehadiran }}</td>
-                                                    <td>{{ $user->kompetensi }}</td>
-                                                    <td>{{ $user->skill }}</td>
-                                                    <td>{{ $user->status }}</td>
+                                                <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->kehadiran ?? '-' }}</td>
+                                        <td>{{ $user->kompetensi ?? '-' }}</td>
+                                        <td>{{ $user->skill ?? '-' }}</td>
+                                        <td>{{ $user->status ?? '-' }}</td>
                                                     <td>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="" class="btn btn-sm btn-primary">

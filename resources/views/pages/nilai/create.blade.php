@@ -20,11 +20,11 @@
 
             <div class="section-body">
                 <div class="card">
-                    <form action="{{ route('nilai.store') }}" method="POST">
+                    <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <input type="hidden" name="user_id" value="">
-                        
+                        <input type="hidden" name="user_id" value="{{ $user->id }}"> <!-- Pastikan ini menggunakan ID -->
+
                         <div class="card-header">
                             <h4>Edit Nilai Peserta</h4>
                         </div>
@@ -40,12 +40,6 @@
                                     value="{{ $user->name }}" 
                                     class="form-control" 
                                     readonly>
-                                
-                                <!-- Hidden input untuk user_id -->
-                                <input 
-                                    type="hidden" 
-                                    name="user_id" 
-                                    value="{{ $user->name }}">
                                 
                                 @error('user_id')
                                     <div class="invalid-feedback">
@@ -78,7 +72,7 @@
                                     type="text" 
                                     name="kompetensi" 
                                     id="kompetensi" 
-                                   placeholder="kompetensi"
+                                    placeholder="Kompetensi"
                                     class="form-control @error('kompetensi') is-invalid @enderror">
                                 
                                 @error('kompetensi')
@@ -95,7 +89,7 @@
                                     type="text" 
                                     name="skill" 
                                     id="skill" 
-                                    placeholder="Kehadiran"
+                                    placeholder="Skill"
                                     class="form-control @error('skill') is-invalid @enderror">
                                 
                                 @error('skill')
@@ -112,7 +106,7 @@
                                     type="text" 
                                     name="status" 
                                     id="status" 
-                                    placeholder="status"
+                                    placeholder="Status"
                                     class="form-control @error('status') is-invalid @enderror">
                                 
                                 @error('status')

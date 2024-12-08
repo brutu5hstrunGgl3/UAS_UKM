@@ -18,11 +18,12 @@ class NilaiController extends Controller
     //index
     public function index(Request $request)
     {
-         $users = User::where('rul', 'PESERTA')
-         ->paginate(10)
-         ->withQueryString();
-    // dd($nilais); // Untuk melihat data yang diambil
-    return view('pages.nilai.index', compact('users'));
+        $users = User::with('nilai') // Mengambil relasi nilai
+                    ->where('rul', 'PESERTA')
+                    ->paginate(10);
+                  
+    
+        return view('pages.nilai.index', compact('users'));
     }
 
     public function create(Request $request, $id)
@@ -32,7 +33,7 @@ class NilaiController extends Controller
     }
     
 
-    public function store(StoreNilaiRequest $request)
+    public function store(Request $request)
 {
     // Ambil data user berdasarkan user_id
     $user = User::findOrFail($request->input('user_id'));
@@ -53,7 +54,7 @@ class NilaiController extends Controller
     // Simpan data ke tabel nilai (misalnya)
     nilai::create($data);
 
-    return redirect()->route('nilai.create')->with('success', 'Data berhasil disimpan.');
+    return redirect()->route('nilai.index')->with('success', 'Data berhasil disimpan.');
 }
 
 public function destroy(nilai $users)

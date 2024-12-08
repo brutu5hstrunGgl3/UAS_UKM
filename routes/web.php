@@ -117,7 +117,13 @@ Route::middleware('auth', Admin::class)->group(function () {
 Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');});
    
-    Route::resource('nilai', NilaiController::class);
+    Route::get('/nilai/create/{id}', [NilaiController::class, 'create'])->name('nilai.create');
+    Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+// Rute untuk menyimpan nilai
+    Route::post('/nilai/store', [NilaiController::class, 'store'])->name('nilai.store');
+
+// Rute untuk menghapus nilai
+    Route::delete('/nilai/{users}', [NilaiController::class, 'destroy'])->name('nilai.destroy');
     
 
 
