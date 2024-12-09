@@ -16,6 +16,8 @@ use App\Http\Controllers\KumpulTugasController;
 use App\Http\Controllers\NilaiController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\LihatNilaiController;
+
 
 
 
@@ -121,7 +123,7 @@ Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
 // Rute untuk menyimpan nilai
     Route::post('/nilai/store', [NilaiController::class, 'store'])->name('nilai.store');
-
+    Route::get('/lihatnilai', [LihatNilaiController::class, 'index'])->name('lihatnilai.index');
 // Rute untuk menghapus nilai
     Route::delete('/nilai/{users}', [NilaiController::class, 'destroy'])->name('nilai.destroy');
     

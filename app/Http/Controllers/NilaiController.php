@@ -18,11 +18,11 @@ class NilaiController extends Controller
     //index
     public function index(Request $request)
     {
+        // Mengambil data pengguna dan nilai terkait
         $users = User::with('nilai') // Mengambil relasi nilai
-                    ->where('rul', 'PESERTA')
-                    ->paginate(10);
-                  
-    
+        ->where('rul', 'PESERTA') // Hanya user dengan rul 'PESERTA'
+        ->paginate(10);
+        // Mengirim data ke view
         return view('pages.nilai.index', compact('users'));
     }
 

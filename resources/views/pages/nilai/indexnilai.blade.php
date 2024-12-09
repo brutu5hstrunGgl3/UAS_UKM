@@ -53,18 +53,24 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                               
+                                                <th>Kehadiran</th>
+                                                <th>Kompetensi</th>
+                                                <th>Skill</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse ($users as $user)
+                                            @forelse ($nilais as $user)
                                                 <tr>
                                                     <td>{{ $user->name }}</td> <!-- Nama dari tabel users -->
-                                                    <!-- Status -->
+                                                    <td>{{ $user->kehadiran ?? 'Belum Diisi' }}</td> <!-- Kehadiran dari tabel nilais -->
+                                                    <td>{{ $user->kompetensi ?? 'Belum Diisi' }}</td> <!-- Kompetensi -->
+                                                    <td>{{ $user->skill ?? 'Belum Diisi' }}</td> <!-- Skill -->
+                                                    <td>{{ $user->status ?? 'Belum Diisi' }}</td> <!-- Status -->
                                                     <td>
-                                                        <a href="{{ route('nilai.create', $user->id) }}" class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i> Input Nilai
+                                                        <a href="" class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i> Edit 
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -76,7 +82,7 @@
                                         </tbody>
                                     </table>
                                     <div class="float-right">
-                                        {{ $users->withQueryString()->links() }}
+                                        {{ $nilais ->withQueryString()->links() }}
                                     </div>
                                 </div>
                             </div>

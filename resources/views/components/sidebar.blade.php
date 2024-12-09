@@ -128,6 +128,9 @@
                     <li>
                         <a class="nav-link" href="{{route('nilai.index')}}">Input Nilai</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="{{route('lihatnilai.index')}}">Lihat Nilai</a>
+                    </li>
                     @endif
                     @if(auth()->user()->rul == 'ADMIN')
                     <li>
