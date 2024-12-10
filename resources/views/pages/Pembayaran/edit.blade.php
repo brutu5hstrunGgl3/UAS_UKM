@@ -27,8 +27,8 @@
         <div class="form-group">
             <label for="status">Status</label>
             <select name="status" id="status" class="form-control">
-                <option value="Belum Bayar" {{ $pembayaran->status == 'Belum Bayar' ? 'selected' : '' }}>Belum Bayar</option>
-                <option value="Sudah Bayar" {{ $pembayaran->status == 'Sudah Bayar' ? 'selected' : '' }}>Sudah Bayar</option>
+                <option value="Rejected" {{ $pembayaran->status == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                <option value="Approved" {{ $pembayaran->status == 'Approved' ? 'selected' : '' }}>Approved</option>
             </select>
         </div>
 
