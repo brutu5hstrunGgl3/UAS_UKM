@@ -46,7 +46,7 @@ class PembayaranController extends Controller
 
     public function StorePembayaranRequest(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
             'email' => 'required|email|max:255',
@@ -66,12 +66,13 @@ class PembayaranController extends Controller
         
 
         Pembayaran::create([
+            'user_id' => auth()->id(), // User yang melakukan pembayaran
             'name' => $request->name,
             'no_telp' => $request->no_telp,
             'email' => $request->email,
-            'jenis_paket' => $request->jenis_paket,
-            'harga' => $request->harga,
-            'status' => 'Belum Bayar',
+            'jenis_paket' => $validated['jenis_paket'], // Isi jenis_paket
+            'harga' => $validated['harga'], // Harga paket
+            'status' => 'pending', // Status default adalah pending
             'tanggal_pembayaran' => now(),
             'struk' => $struk ? str_replace('public/', '', $struk) : null,
             'user_id' => Auth::id(), // Menyimpan path file jika ada
@@ -96,19 +97,43 @@ class PembayaranController extends Controller
     return view('pages.Pembayaran.edit', compact('pembayaran'));
 }
 
-public function update(Request $request, Pembayaran $pembayaran)
+public function update(Request $request, $id)
 {
+    // Validasi input
     $request->validate([
-       
-        'status' => 'required|in:Belum Bayar,Sudah Bayar', // Validasi status
+        'status' => 'required|in:Approved,Rejected', // Hanya menerima status Approved atau Rejected
     ]);
+
+    // Ambil data pembayaran berdasarkan ID
+    $pembayaran = Pembayaran::findOrFail($id);
+
+    // Ambil user terkait pembayaran
+    $user = $pembayaran->user;
+
+    // Cek apakah status yang dipilih adalah "Approved"
+    if ($request->status == 'Approved') {
+        // Tambahkan jenis_paket ke tabel users
+        $user->jenis_paket = $pembayaran->jenis_paket;
+        $user->save(); // Simpan perubahan pada tabel users
+    }
+
+    // Jika status adalah "Rejected"
+    if ($request->status == 'Rejected') {
+        // Kosongkan jenis_paket pada tabel users
+        $user->jenis_paket = null;
+        $user->save(); // Simpan perubahan pada tabel users
+    }
+
+    /// Update status pembayaran di tabel pembayarans
+    $pembayaran->status = $request->status;
+    $pembayaran->save();
 
     $pembayaran->update([
        
         'status' => $request->status, // Update status pembayaran
     ]);
 
-    return redirect()->route('pembayaran.index')->with('success', 'Data berhasil diperbarui.');
+    return redirect()->route('pembayaran.index', ['id' => $pembayaran->id])->with('success', 'Data berhasil diperbarui.');
 }
 
 public function download($id)
