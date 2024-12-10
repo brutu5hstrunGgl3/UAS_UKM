@@ -37,7 +37,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Materi</th>
+                                            <th>Judul Tugas</th>
                                             <th>Pemateri</th>
                                             <th>File</th>
                                             <th>Tanggal Upload</th>
