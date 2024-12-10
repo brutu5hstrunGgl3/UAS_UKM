@@ -1769,10 +1769,16 @@ tr:first-child > td > .fc-day-grid-event {
   margin-bottom: 30px;
   text-align: center;
 }
-.pricing.pricing-highlight .pricing-title {
-  background-color: #6777ef;
+.pricing.pricing-highlight .pricing-title-premium {
+  background-color: #FFD700;
   color: #fff;
 }
+
+.pricing.pricing-highlight .pricing-title-standar {
+  background-color: #3700ff;
+  color: #fff;
+}
+
 .pricing.pricing-highlight .pricing-cta a {
   background-color: #6777ef;
   color: #fff;
@@ -1783,7 +1789,18 @@ tr:first-child > td > .fc-day-grid-event {
 .pricing .pricing-padding {
   padding: 40px;
 }
-.pricing .pricing-title {
+.pricing .pricing-title-standar {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  background-color: #f3f6f8;
+  color: #6777ef;
+  border-radius: 0 0 3px 3px;
+  display: inline-block;
+  padding: 5px 15px;
+}
+.pricing .pricing-title-premium {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;

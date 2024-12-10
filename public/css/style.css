@@ -1624,6 +1624,12 @@ h6 .badge {
   background-color: #ffb71d;
   border-color: #ffc31f;
 }
+.btn-primary-pesan, .btn-primary.disabled {
+  box-shadow: 0 2px 6px #acb5f6;
+  border-color: #3700ff;
+  background-color: #3700ff;
+  color: #ffffff;
+}
 .btn-primary:focus, .btn-primary.disabled:focus {
   background-color: #394eea !important;
 }
@@ -1631,8 +1637,13 @@ h6 .badge {
   background-color: #394eea !important;
 }
 .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-  background-color: #394eea !important;
+  background-color: #ff0000 !important;
 }
+.btn-primary-pesan:active, .btn-primary-pesan:hover, .btn-primary-pesan.disabled:active, .btn-primary-pesan.disabled:hover {
+  background-color: #ff0000 !important;
+  color: #ffffff;
+}
+
 
 .btn-outline-primary, .btn-outline-primary.disabled {
   border-color: #6777ef;
