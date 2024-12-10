@@ -63,11 +63,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <select name="kelas" class="form-control" required>
-                                    <option value="Reguler">Reguler</option>
-                                    <option value="Non Reguler">Non Reguler</option>
-                                </select>
+                                <label for="kelas">Judul Tugas</label>
+                                <input id="judul_tugas" type="text"
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    name="judul_tugas" autofocus required>
+                                <div class="invalid-feedback">
+                                Please fill in your Judul Tugas.
+                                </div>
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
