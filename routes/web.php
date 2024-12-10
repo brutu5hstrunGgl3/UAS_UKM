@@ -35,11 +35,27 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('tugas', TugasController::class);
     Route::get('/tugas/download/{learning}', [TugasController::class, 'download'])->name('tugas.download');
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/captcha-refresh', [CaptchaController::class, 'refresh']);
     Route::get('/home', function () {
-    return view('pages.app.dashboard_lms');    
+    $role = auth()->user()->rul;
+        if ($role === 'ADMIN') {
+            return redirect()->route('dashboard_admin');
+        } elseif ($role === 'PEMATERI') {
+            return redirect()->route('dashboard_admin'); // Pemateri juga diarahkan ke dashboard admin
+        } else {
+            return redirect()->route('dashboard_lms');
+        }
     })->name('home');
+
+    Route::get('/dashboard_admin', function () {
+        return view('pages.app.dashboard_admin');
+    })->name('dashboard_admin');
+    
+    Route::get('/dashboard_lms', function () {
+        return view('pages.app.dashboard_lms');
+    })->name('dashboard_lms');
+    
     
     // Route::resource('user', UserController::class);
     Route::resource('lecturer', LecturerController::class);
@@ -88,9 +104,7 @@ Route::put('/pembayaran/{pembayaran}', [PembayaranController::class, 'update'])-
 Route::get('/formbayar/download/{id}', [PembayaranController::class, 'download'])->name('formbayar.download');
 
 Route::group(['middleware' => ['auth', 'Peserta']], function() {
-    Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');
-    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
-    
+    Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index');    
  });
 
  Route::get('/Pembayaran/export', function () {
@@ -127,7 +141,9 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 // Rute untuk menghapus nilai
     Route::delete('/nilai/{users}', [NilaiController::class, 'destroy'])->name('nilai.destroy');
     
-
+    Route::get('password/change', function () {
+        return view('pages.auth.auth-ganti-password');
+    })->name('password.change');
 
    
     
