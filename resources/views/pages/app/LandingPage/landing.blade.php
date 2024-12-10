@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer 77 - Bimbel Online Komputer</title>
     <style>
@@ -173,40 +174,76 @@ nav a:hover {
             max-width: 600px;
         }
 
-        /* Contact Form */
         .contact {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #0033cc, #3366ff, #6699ff); 
-            color: white;
-        }
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #e6f7ff, #cceeff); /* Gradasi biru muda */
+    color: #333;
+    border-top: 4px solid #3366cc; /* Pembatas atas */
+    border-bottom: 4px solid #3366cc; /* Pembatas bawah */
+}
 
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-        }
+.contact-container h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #0033cc;
+}
 
-        .contact-form button {
-            background: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.contact-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
 
-        .contact-form button:hover {
-            background: #45a049;
-        }
+.contact-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-item i {
+    font-size: 28px;
+    color: #0033cc;
+    flex-shrink: 0;
+}
+
+.contact-item p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.contact-item a {
+    color: #0033cc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: #ff6600;
+}
+
 
         .about {
     padding: 100px 20px;
@@ -379,7 +416,7 @@ nav a:hover {
     <section class="hero" id="beranda">
         <div class="hero-content">
             <h1>Belajar Komputer Jadi Lebih Mudah</h1>
-            <p>Tingkatkan kemampuan komputermu bersama mentor berpengalaman melalui pembelajaran online yang interaktif</p>
+            <p>Tingkatkan kemampuan komputermu bersama pemateri berpengalaman melalui pembelajaran online yang interaktif</p>
             <a href="{{route('login')}}" class="cta-button">Mulai Belajar Sekarang</a>
         </div>
     </section>
@@ -391,7 +428,7 @@ nav a:hover {
                 <p>Belajar dari mana saja dan kapan saja dengan materi yang dapat diakses 24/7</p>
             </div>
             <div class="feature-card">
-                <h3>Mentor Profesional</h3>
+                <h3>Pemateri Profesional</h3>
                 <p>Dibimbing langsung oleh praktisi IT berpengalaman di bidangnya</p>
             </div>
             <div class="feature-card">
@@ -412,16 +449,36 @@ nav a:hover {
     </section>
 
     <section class="contact" id="kontak">
-        <div class="contact-container">
-            <h2>Hubungi Kami</h2>
-            <form class="contact-form" action="proses.php" method="POST">
-                <input type="text" name="nama" placeholder="Nama Lengkap" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="pesan" placeholder="Pesan" rows="5" required></textarea>
-                <button type="submit">Kirim Pesan</button>
-            </form>
+    <div class="contact-container">
+        <h2>Hubungi Kami</h2>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="fas fa-building"></i>
+                <p><strong>Nama Perusahaan:</strong><br>Computer 77</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p><strong>Email:</strong><br><a href="mailto:info@computer77.com">info@computer77.com</a></p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-instagram"></i>
+                <p><strong>Instagram:</strong><br><a href="https://instagram.com/computer77" target="_blank">@computer77</a></p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <p><strong>WhatsApp:</strong><br><a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-facebook"></i>
+                <p><strong>Facebook:</strong><br><a href="https://facebook.com/computer77" target="_blank">Computer 77</a></p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-youtube"></i>
+                <p><strong>YouTube:</strong><br><a href="https://youtube.com/@computer77" target="_blank">Channel Computer 77</a></p>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="about" id="tentang-kami">
     <div class="about-container">
@@ -439,7 +496,7 @@ nav a:hover {
                     <div class="stat-label">Mentor Profesional</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">4-+</div>
+                    <div class="stat-number">4+</div>
                     <div class="stat-label">Program Kursus</div>
                 </div>
                 <div class="stat-item">
