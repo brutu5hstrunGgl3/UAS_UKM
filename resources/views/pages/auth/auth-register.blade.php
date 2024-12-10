@@ -35,6 +35,21 @@
                 </div>
 
                 <div class="form-group">
+                        <label for="phone">Nomor Handphone</label>
+                        <input id="phone" type="number"
+                            class="form-control @error('phone') is-invalid @enderror"
+                            name="phone" autofocus required>
+                        <div class="invalid-feedback">
+                        Please fill in your phone.
+                        </div>
+                        @error('phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email"
                         class="form-control @error('email') is-invalid @enderror"
