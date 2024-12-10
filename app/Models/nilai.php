@@ -20,6 +20,8 @@ class nilai extends Model
         'skill', 
         'status',    // Skill yang dimiliki
             // Nama file struk (jika ada)
+        'updated_at', 
+        'created_at'
     ];
 
     public function user()
