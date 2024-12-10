@@ -1,89 +1,179 @@
 @extends('layouts.app')
 
-@section('title', ' Lms Sekolah Dasar Negri')
-
+@section('title', 'LMS Sekolah Dasar Negeri')
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/owl.carousel/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/owl.carousel/dist/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
+    <style>
+        .course-card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .course-card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .course-description {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .btn-learn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-learn:hover, .btn-learn:focus {
+            text-decoration: none;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
 @endpush
 
 @section('main')
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Sistem learning Bimbel komputer 77 </h1>
-                <div class="section-header-breadcrumb">
-                    
-                </div>
+                <h1>Sistem Learning Bimbel Komputer 77</h1>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title"></h2>
-                
+                <h2 class="section-title">Pelajari Materi Komputer</h2>
+                <p class="section-lead">Berbagai materi pembelajaran komputer untuk menunjang kebutuhan belajar Anda.</p>
 
+                @if(auth()->user()->rul == 'PESERTA')
+                @php
+                    $pembayaran = App\Models\Pembayaran::whereHas('user', function ($query) {
+                        $query->where('name', auth()->user()->name);
+                    })->first();
+                @endphp
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Albums</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="owl-carousel owl-theme slider"
-                                    id="slider1">
-                                    <div><img alt="image"
-                                            src="img/771.jpg"></div>
-                                    <div><img alt="image"
-                                            src="img/772.jpg"></div>
-                                    <div><img alt="image"
-                                            src="img/773.jpg"></div>
-                                   
-                                </div>
+                    <!-- Materi Word -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="{{ asset('img/word.jpg') }}" alt="Microsoft Word">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Belajar Microsoft Word</h3>
+                                <p class="course-description">Pelajari cara membuat dokumen profesional dengan Microsoft Word.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                    <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Berita</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="owl-carousel owl-theme slider"
-                                    id="slider2">
-                                    <div><img alt="image"
-                                            src="img/773.jpg">
-                                        <div class="slider-caption">
 
-                                            <!-- <div class="slider-title active"><a href =""></a>Image 1</div> -->
-                                            
-                                        </div>
-                                    </div>
-                                    <div><img alt="image"
-                                            src="">
-                                        <div class="slider-caption">
-                                        <div class="breadcrumb-item active"><a href=""></a></div>
-                                            <div class="slider-description">
-                                               </div>
-                                        </div>
-                                    </div>
-                                    <div><img alt="image"
-                                            src="">
-                                        <div class="slider-caption">
-                                            <div class="slider-title"></div>
-                                            <div class="slider-description"></div>
-                                        </div>
-                                    </div>
-                                    
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Materi Excel -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="img/excel.jpg" alt="Microsoft Excel">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Belajar Microsoft Excel</h3>
+                                <p class="course-description">Kuasi analisis data dan perhitungan dengan Microsoft Excel.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi PowerPoint -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="img/ppt.jpg" alt="Microsoft PowerPoint">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Belajar PowerPoint</h3>
+                                <p class="course-description">Ciptakan presentasi menarik dengan Microsoft PowerPoint.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi Desain Grafis -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="img/desain-grafis.jpg" alt="Desain Grafis">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Belajar Desain Grafis</h3>
+                                <p class="course-description">Pahami dasar-dasar desain grafis untuk kebutuhan kreatif Anda.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi Internet -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="img/safe-browsing.jpg" alt="Penggunaan Internet">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Penggunaan Internet</h3>
+                                <p class="course-description">Pelajari cara aman dan efektif dalam menggunakan internet.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi Pemrograman -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="course-card">
+                            <img src="img/pemrograman.jpg" alt="Dasar Pemrograman">
+                            <div class="course-card-body">
+                                <h3 class="course-title">Belajar Dasar Pemrograman</h3>
+                                <p class="course-description">Mulai perjalanan coding Anda dengan memahami dasar pemrograman.</p>
+                                @if($pembayaran && $pembayaran->status == 'Approved')
+                                <a href="{{ route('lecturer.index') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @else
+                                    <a href="{{ route('pages.Pembayaran.paket') }}" class="btn-learn">Pelajari Sekarang</a>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </section>
     </div>
@@ -92,7 +182,4 @@
 @push('scripts')
     <!-- JS Libraies -->
     <script src="{{ asset('library/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/modules-slider.js') }}"></script>
 @endpush
