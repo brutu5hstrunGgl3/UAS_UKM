@@ -44,7 +44,7 @@
                     })->first();
                 @endphp
 
-                @if($pembayaran && $pembayaran->status == 'Sudah Bayar')
+                @if($pembayaran && $pembayaran->status == 'Approved')
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown">
                             <i class="fas fa-book"></i><span>Materi</span>
@@ -87,9 +87,10 @@
                     @endif
 
                     <li>
+
     {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
 
-    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Sudah Bayar')
+    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
         <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
     @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
@@ -104,7 +105,7 @@
 <li>
     {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
 
-    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Sudah Bayar')
+    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
         <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
     @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
@@ -170,16 +171,6 @@
                 </ul>
             </li>
             @endif
-
-            {{-- Menu Settings --}}
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown">
-                    <i class="fas fa-fire"></i><span>Settings</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <!-- Add your settings options here -->
-                </ul>
-            </li>
 
         </ul>
     </aside>
