@@ -52,7 +52,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nama</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ auth()->user()->name }}" class="form-control" required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ auth()->user()->name }}" class="form-control" readonly>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="no_telp">Nomor Telepon</label>
-                                <input type="text" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" class="form-control" required>
+                                <input type="text" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{ auth()->user()->phone }}" class="form-control" readonly>
                                 @error('no_telp')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ auth()->user()->email }}" class="form-control" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ auth()->user()->email }}" class="form-control" readonly>
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
