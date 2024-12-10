@@ -1,3 +1,3 @@
   <div class="simple-footer">
-      Copyright &copy; project Fadli
+      Copyright &copy; Computer 77 - Bimbel Online Komputer
   </div>
