@@ -27,7 +27,7 @@ class Peserta
         })->first();
 
         // Periksa apakah status pembayaran adalah "Sudah Bayar"
-        if ($pembayaran && $pembayaran->status == 'Sudah Bayar') {
+        if ($pembayaran && $pembayaran->status == 'Approved') {
             // Jika sudah bayar dan terverifikasi, lanjutkan request
             return $next($request);
         }
