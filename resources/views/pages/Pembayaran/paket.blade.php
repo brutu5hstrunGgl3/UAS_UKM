@@ -12,8 +12,7 @@
             <div class="section-header">
                 <h1>Paket Bimbel</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Components</a></div>
+                    <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
                     <div class="breadcrumb-item">Pricing</div>
                 </div>
             </div>
@@ -21,55 +20,56 @@
             <div class="section-body">
                 <h2 class="section-title">Harga Bimbel</h2>
                 <div class="row justify-content-center -mt-10">
-                    <!-- Kantor Package -->
+
+                    <!-- Kelas Premium -->
                     <div class="col-12 col-md-4 col-lg-4">
-                        <div class="pricing">
-                            <div class="pricing-title">
-                                Kantor
+                        <div class="pricing pricing-highlight">
+                            <div class="pricing-title-premium">
+                                Kelas Premium
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
-                                    <div>Rp 5.000.000</div>
+                                    <div>Rp 1.200.000</div>
                                     <div>per 3 Bulan</div>
                                 </div>
                                 <div class="pricing-details">
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Dapat Akun Pembelajaran</div>
+                                        <div class="pricing-item-label">Pembelajaran Lebih Lama dengan Harga yang Lebih Murah</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran Di Tempat</div>
+                                        <div class="pricing-item-label">Dibuatkan Sertifikat</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Sertifikat</div>
+                                        <div class="pricing-item-label">Mendapatkan Bimbingan Personal</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Custom Materi</div>
+                                        <div class="pricing-item-label">Akses Materi dari dasar hingga mahir</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="pricing-cta">
                                 <!-- Form untuk melakukan pembayaran -->
                                 <form action="{{ route('form.bayar') }}" method="GET">
-                                    <input type="hidden" name="paket" value="Kantor">
+                                    <input type="hidden" name="paket" value="Premium">
                                     <!-- Input harga format mata uang (readonly) -->
                                     
                                     <!-- Input tersembunyi untuk mengirimkan harga murni -->
-                                    <input type="hidden" name="harga"  value="5000000">
+                                    <input type="hidden" name="harga"  value="1200000">
                                     <button type="submit" class="btn btn-primary">Pesan <i class="fas fa-shopping-cart"></i></button>
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Private Package -->
+                    <!-- Kelas Standar -->
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="pricing pricing-highlight">
-                            <div class="pricing-title">
-                                Private
+                            <div class="pricing-title-standar">
+                                Kelas Standar
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
@@ -79,31 +79,31 @@
                                 <div class="pricing-details">
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Dapat akun bimbel</div>
+                                        <div class="pricing-item-label">Akses Materi Pembelajaran Dasar hingga Menengah</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran di tempat bimbel</div>
+                                        <div class="pricing-item-label">Hanya dibuatkan Nilai tanpa Sertifikat</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Sertifikat</div>
+                                        <div class="pricing-item-label">Solusi Hemat bagi Siswa yang Ingin Cepat Siap</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Jadwal Senin-Sabtu "waktu disesuaikan"</div>
+                                        <div class="pricing-item-label">Cocok untuk Belajar dengan Tujuan Tertentu</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="pricing-cta">
                                 <!-- Form untuk melakukan pembayaran -->
                                 <form action="{{ route('form.bayar') }}" method="GET">
-                                    <input type="hidden" name="paket" value="Reguler">
+                                    <input type="hidden" name="paket" value="Standar">
                                     <!-- Input harga format mata uang (readonly) -->
                                     
                                     <!-- Input tersembunyi untuk mengirimkan harga murni -->
                                     <input type="hidden" name="harga"  value="500000">
-                                    <button type="submit" class="btn btn-primary">Pesan <i class="fas fa-shopping-cart"></i></button>
+                                    <button type="submit" class="btn btn-primary-pesan">Pesan <i class="fas fa-shopping-cart"></i></button>
                                 </form>
                             </div>
                         </div>
