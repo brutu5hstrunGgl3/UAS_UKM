@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('no_telp')->nullable();  // Ubah menjadi string
             $table->string('email')->nullable();
-            $table->string('jenis_paket')->nullable();
+            $table->string('jenis_paket');
             $table->decimal('harga', 8, 2);
-            $table->string('status')->nullable();
+            $table->string('status')->default('pending');
             $table->string('struk')->nullable();
             $table->date('tanggal_pembayaran')->nullable();
             $table->timestamps();
