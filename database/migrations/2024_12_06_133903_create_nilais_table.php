@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('kehadiran'); // Kehadiran (misalnya: 1 untuk hadir, 0 untuk tidak hadir)
             $table->string('kompetensi'); // Kolom untuk kompetensi
             $table->string('skill'); // Kolom untuk skill 
+            $table->string('status'); // Kolom untuk status 
             $table->timestamps();
             
 
