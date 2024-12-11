@@ -55,7 +55,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Materi</label>
+                                <label>Link Materi</label>
                                 <input type="text" class="form-control @error('materi') is-invalid @enderror" name="materi">
                                 @error('materi')
                                     <div class="invalid-feedback">

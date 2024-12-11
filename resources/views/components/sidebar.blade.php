@@ -30,7 +30,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="{{ route('lecturer.index') }}">Tambah Kelas</a>
+                        <a class="nav-link" href="{{ route('lecturer.index') }}">Tambah Materi</a>
                     </li>
                 </ul>
             </li>
@@ -82,7 +82,7 @@
                 <ul class="dropdown-menu">
                     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                     <li>
-                        <a class="nav-link" href="{{ route('tugas.create') }}">Upload Soal</a>
+                        <a class="nav-link" href="{{ route('tugas.create') }}">Upload Tugas</a>
                     </li>
                     @endif
 
@@ -94,7 +94,7 @@
         <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
     @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
+        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas Anda</a>
 
    
     @endif
@@ -108,11 +108,11 @@
     @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
         <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
-    @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+    @elseif(auth()->user()->rul == 'ADMIN')
     <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
     @endif
     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-    <a class="nav-link" href="{{ route('kumpul.index') }}">Tugas Peserta</a>
+    <a class="nav-link" href="{{ route('kumpul.index') }}">Lihat Tugas Peserta</a>
 @endif
     
 </li>
@@ -170,9 +170,11 @@
                     <i class="fas fa-shopping-cart"></i><span>History Transaksi</span>
                 </a>
                 <ul class="dropdown-menu">
+                    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
                     <li>
-                        <a class="nav-link" href="">Pembayaran</a>
+                        <a class="nav-link" href="{{ route('history.pembayaran') }}">Pembayaran</a>
                     </li>
+                    @endif
                 </ul>
             </li>
             @endif

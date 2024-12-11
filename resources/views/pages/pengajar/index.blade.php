@@ -16,7 +16,7 @@
                 @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                    
                     <div class="section-header-button">
-                        <a href="{{ route('lecturer.create') }}" class="btn btn-primary">Tambah Pemateri</a>
+                        <a href="{{ route('lecturer.create') }}" class="btn btn-primary">Masukkan Materi Disini</a>
                     </div>
                 @endif
             </div>

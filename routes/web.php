@@ -17,6 +17,7 @@ use App\Http\Controllers\NilaiController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\LihatNilaiController;
+use App\Http\Controllers\HistoryController;
 
 
 
@@ -149,6 +150,7 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::get('/nilai/{id}/download', [NilaiController::class, 'download'])->name('nilai.download');
 
+    Route::get('/pembayaran/history', [HistoryController::class, 'history'])->name('history.pembayaran');
    
     
 

@@ -51,8 +51,9 @@ class KumpulTugasController extends Controller
 
         // Upload file jika ada
         if ($request->hasFile('file')) {
-            // Simpan file ke folder 'uploads/tugas' di penyimpanan publik
-            $filePath = $request->file('file')->store('uploads/tugas', 'public');
+            $filePath = $request->file('file')->getClientOriginalName();
+            // Simpan file ke dalam folder 'public/tugas'
+            $request->file('file')->storeAs('public/tugas', $filePath);
         } else {
             // Jika tidak ada file yang diunggah, tampilkan error
             return redirect()->back()->with('error', 'File tidak ditemukan atau gagal diunggah.');
@@ -91,7 +92,7 @@ class KumpulTugasController extends Controller
         
 
         // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', ' File Tugas Anda  Berhasil Dikumpulkan!');
+        return redirect()->back()->with('success', 'Tugas Anda  Berhasil Dikumpulkan!');
     }
 }
    
@@ -100,10 +101,13 @@ public function download($id)
     // Cari tugas berdasarkan id
     $kumpul_tugas = KumpulTugas::find($id);
 
-    // Jika tugas tidak ditemukan, redirect dengan pesan error
-    if (!$kumpul_tugas) {
-        return redirect()->route('kumpul.index')->with('error', 'Tugas tidak ditemukan.');
+    // Gunakan Storage facade untuk mengecek file
+    if (!Storage::exists('public/tugas/' . $kumpul_tugas->file)) {
+        return redirect()->route('kumpul.index')->with('error', 'File tidak ditemukan di server.');
     }
+
+    // Download file dengan Storage facade
+    return Storage::download('public/tugas/' . $kumpul_tugas->file);
 
     // Dapatkan path file dari storage
     $filePath = storage_path('app/public/tugas/' . $kumpul_tugas->file);

@@ -58,7 +58,8 @@
                                                 <th>Skill</th>
                                                 <th>Status</th>
                                                 <th>Sertifikat</th> <!-- Tambahkan baris ini -->
-                                                @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI' || auth()->user()->rul == 'PESERTA')
+                                                @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+                                                <th>Action</th>
                                                 @endif
                                             </tr>
                                         </thead>
@@ -79,6 +80,7 @@
                                                             <span class="text-danger">Belum Ada</span>
                                                         @endif
                                                     </td>
+                                                    <td>
                                                     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
                                                         <a href="{{ route('nilai.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
                                                             <i class="fas fa-edit"></i> Edit
@@ -91,7 +93,6 @@
                                                             </button>
                                                         </form>
                                                     @endif
-
                                                     </td>
                                                 </tr>
                                             @empty

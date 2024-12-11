@@ -52,7 +52,7 @@ class TugasController extends Controller
 
 
             // Redirect ke halaman index dengan pesan sukses
-            return redirect()->route('tugas.index')->with('success', 'File berhasil diupload');
+            return redirect()->route('tugas.index')->with('success', 'Tugas telah ditambahkan');
         }
 
         return redirect()->back()->with('error', 'File tidak ditemukan');

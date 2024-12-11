@@ -13,7 +13,7 @@
             <div class="section-header d-flex justify-content-between align-items-center">
                 <h1>Learning Module System</h1>
                 @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-                    <a href="{{ route('tugas.create') }}" class="btn btn-primary">Tambah Soal</a>
+                    <a href="{{ route('tugas.create') }}" class="btn btn-primary">Tambah Tugas</a>
                 @endif
             </div>
 

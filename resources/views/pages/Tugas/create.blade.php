@@ -26,11 +26,11 @@
                         <form action="{{ route('tugas.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-header">
-                                <h4>Upload Soal</h4>
+                                <h4>Upload Tugas</h4>
                             </div>
                             <div class="col-md-8" id="settings-card">
                                 <div class="form-group row align-items-center">
-                                    <label for="learning" class="form-control-label col-sm-3 text-md-right">Judul Soal</label>
+                                    <label for="learning" class="form-control-label col-sm-3 text-md-right">Judul Tugas</label>
                                     <div class="col-sm-6 col-md-6">
                                         <input type="text" class="form-control @error('learning') is-invalid @enderror" name="learning" required>
                                         @error('learning')
@@ -40,7 +40,7 @@
                                 </div>
 
                                 <div class="form-group row align-items-center">
-                                    <label for="lecturer" class="form-control-label col-sm-3 text-md-right">Pengajar</label>
+                                    <label for="lecturer" class="form-control-label col-sm-3 text-md-right">Nama Pemateri</label>
                                     <div class="col-sm-6 col-md-6">
                                         <input type="text" class="form-control @error('lecturer') is-invalid @enderror" name="lecturer" required>
                                         @error('lecturer')

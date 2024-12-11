@@ -33,6 +33,12 @@
                                     class="rounded-circle profile-widget-picture mb-4">
                                 @endif
 
+                                @if(auth()->user()->rul == 'PEMATERI')
+                                    <img alt="image" 
+                                    src="{{ asset('img/avatar/avatar-1.png') }}" 
+                                    class="rounded-circle profile-widget-picture mb-4">
+                                @endif
+
                                 @if(auth()->user()->rul == 'PESERTA')
                                     <img alt="image" 
                                     src="{{ asset('img/avatar/avatar-1.png') }}" 
@@ -65,11 +71,17 @@
                                             <input type="number" name="phone" class="form-control" value="{{ auth()->user()->phone }}" readonly>
                                         </div>
 
-                                        <!-- Jenis Paket Field (Readonly) -->
                                         <div class="form-group col-md-6 col-12">
-                                            <label>Jenis Paket</label>
-                                            <input type="text" name="jenis_paket" class="form-control" 
-                                                value="{{ auth()->user()->jenis_paket }}" 
+                                            <label>
+                                                @if(auth()->user()->rul == 'PESERTA')
+                                                    Jenis Paket
+                                                @elseif(auth()->user()->rul == 'PEMATERI')
+                                                    Divisi
+                                                @endif
+                                            </label>
+                                            <input type="text" name="{{ auth()->user()->rul == 'PESERTA' ? 'jenis_paket' : 'divisi' }}" 
+                                                class="form-control" 
+                                                value="{{ auth()->user()->rul == 'PESERTA' ? auth()->user()->jenis_paket : auth()->user()->divisi }}" 
                                                 readonly>
                                         </div>
 

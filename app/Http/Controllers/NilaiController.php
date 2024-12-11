@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\nilai;
 use App\Http\Requests\StoreNilaiRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Imports\NilaiImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +77,12 @@ class NilaiController extends Controller
         'status' => 'required',
         'file_nilai' => 'nullable|file|mimes:pdf,docx,doc|max:2048', // Validasi file
     ]);
+
+    // Ambil nama user
+    $user = User::findOrFail($request->user_id);
+    
+    // Tambahkan nama ke validated data
+    $validatedData['name'] = $user->name;
     
     // Perbaiki logika upload file
     if ($request->hasFile('file_nilai')) {
@@ -87,8 +94,19 @@ class NilaiController extends Controller
     }
 
     // Buat record nilai
-    $nilai = Nilai::create($validatedData);
-
+    $nilai = new Nilai();
+    $nilai->user_id = $request->user_id;
+    $nilai->name = $user->name; // Tambahkan nama
+    $nilai->kehadiran = $validatedData['kehadiran'];
+    $nilai->kompetensi = $validatedData['kompetensi'];
+    $nilai->skill = $validatedData['skill'];
+    $nilai->status = $validatedData['status'];
+    // Tambahkan file_nilai jika ada
+    if (isset($validatedData['file_nilai'])) {
+        $nilai->file_nilai = $validatedData['file_nilai'];
+    }
+    
+    $nilai->save();
     return redirect()->route('nilai.index')->with('success', 'Data berhasil disimpan.');
 }
 
@@ -115,10 +133,5 @@ public function destroy($id)
         return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data.');
     }
 }
-
-
-
-
-
     
 }

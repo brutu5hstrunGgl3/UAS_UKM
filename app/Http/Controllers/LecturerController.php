@@ -46,7 +46,7 @@ class LecturerController extends Controller
             
             
         ]);
-        return redirect()->route('lecturer.index')->with('success', 'Pemateri baru telah dibuat.');
+        return redirect()->route('lecturer.index')->with('success', 'Materi Pembelajaran telah ditambahkan.');
     }
 
 
