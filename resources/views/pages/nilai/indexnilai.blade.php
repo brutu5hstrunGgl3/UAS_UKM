@@ -57,7 +57,9 @@
                                                 <th>Kompetensi</th>
                                                 <th>Skill</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Sertifikat</th> <!-- Tambahkan baris ini -->
+                                                @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI' || auth()->user()->rul == 'PESERTA')
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,9 +71,27 @@
                                                     <td>{{ $user->skill ?? 'Belum Diisi' }}</td> <!-- Skill -->
                                                     <td>{{ $user->status ?? 'Belum Diisi' }}</td> <!-- Status -->
                                                     <td>
-                                                        <a href="" class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i> Edit 
+                                                        @if(!empty($user->file_nilai))
+                                                            <a href="{{ asset('storage/' . $user->file_nilai) }}" class="btn btn-sm btn-primary btn-icon" download>
+                                                                <i class="fas fa-download"></i> File Sertifikat
+                                                            </a>
+                                                        @else
+                                                            <span class="text-danger">Belum Ada</span>
+                                                        @endif
+                                                    </td>
+                                                    @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+                                                        <a href="{{ route('nilai.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
+                                                            <i class="fas fa-edit"></i> Edit
                                                         </a>
+                                                        <form action="{{ route('nilai.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-sm btn-danger btn-icon">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    @endif
+
                                                     </td>
                                                 </tr>
                                             @empty
