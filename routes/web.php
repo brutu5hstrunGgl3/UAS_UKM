@@ -4,7 +4,7 @@ use App\Exports\PembayaranExport;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\AttendanceController;
 use Mews\Captcha\CaptchaController;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/captcha-refresh', [CaptchaController::class, 'refresh']);
     Route::get('/home', function () {
-    $role = auth()->user()->rul;
+    $role = auth::user()->rul;
         if ($role === 'ADMIN') {
             return redirect()->route('dashboard_admin');
         } elseif ($role === 'PEMATERI') {

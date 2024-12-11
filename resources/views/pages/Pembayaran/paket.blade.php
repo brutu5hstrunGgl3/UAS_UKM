@@ -29,7 +29,7 @@
                             </div>
                             <div class="pricing-padding">
                                 <div class="pricing-price">
-                                    <div>Rp 1.200.000</div>
+                                    <div>Rp 5.000.000</div>
                                     <div>per 3 Bulan</div>
                                 </div>
                                 <div class="pricing-details">
@@ -39,11 +39,11 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Dibuatkan Sertifikat</div>
+                                        <div class="pricing-item-label">Mendapatkan Sertifikat </div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Mendapatkan Bimbingan Personal</div>
+                                        <div class="pricing-item-label">Materi bisa di Customisasi</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
@@ -58,7 +58,7 @@
                                     <!-- Input harga format mata uang (readonly) -->
                                     
                                     <!-- Input tersembunyi untuk mengirimkan harga murni -->
-                                    <input type="hidden" name="harga"  value="1200000">
+                                    <input type="hidden" name="harga"  value="5000000">
                                     <button type="submit" class="btn btn-primary">Pesan <i class="fas fa-shopping-cart"></i></button>
                                 </form>
                             </div>
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Hanya dibuatkan Nilai tanpa Sertifikat</div>
+                                        <div class="pricing-item-label">Mendapatkan Sertifikat</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
@@ -98,7 +98,7 @@
                             <div class="pricing-cta">
                                 <!-- Form untuk melakukan pembayaran -->
                                 <form action="{{ route('form.bayar') }}" method="GET">
-                                    <input type="hidden" name="paket" value="Standar">
+                                    <input type="hidden" name="paket" value="Standard">
                                     <!-- Input harga format mata uang (readonly) -->
                                     
                                     <!-- Input tersembunyi untuk mengirimkan harga murni -->

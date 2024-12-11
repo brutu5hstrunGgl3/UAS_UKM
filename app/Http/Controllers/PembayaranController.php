@@ -8,11 +8,9 @@ use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-//excel
+use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
-//log
 use Illuminate\Support\Facades\Log;
-
 use Illuminate\Support\Facades\Storage;
 
 class PembayaranController extends Controller
@@ -46,27 +44,37 @@ class PembayaranController extends Controller
 
     public function StorePembayaranRequest(Request $request)
     {
+        // dd($request->all());
+        Log::info('Data request:', $request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'jenis_paket' => 'required|string|max:255',
-            'harga' => 'required|numeric',
+            'jenis_paket' => 'required|string|in:Standard,Premium', // Hanya jenis paket yang diizinkan
+            'harga' => 'required|numeric', // Validasi dasar harga
             'struk' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
         ]);
-
-        
+    
+        // Validasi harga berdasarkan jenis_paket
+        $harga_valid = false;
+        if ($request->jenis_paket === 'Standard' && $request->harga == 500000) {
+            $harga_valid = true;
+        } elseif ($request->jenis_paket === 'Premium' && $request->harga == 5000000) {
+            $harga_valid = true;
+        }
+    
+        if (!$harga_valid) {
+            return redirect()->back()->withErrors(['harga' => 'Harga tidak valid untuk jenis paket yang dipilih.']);
+        }
+    
         // Menyimpan file bukti pembayaran jika ada
         $struk = null;
-        $struk = $request->file('struk')->getClientOriginalName();
-        $struk = $request->file('struk')->store('public/STRUK');
-        
-        
-     
-        
-
+        if ($request->hasFile('struk')) {
+            $struk = $request->file('struk')->store('public/STRUK');
+        }
+    
         Pembayaran::create([
-            'user_id' => auth()->id(), // User yang melakukan pembayaran
+            'user_id' => auth::id(), // User yang melakukan pembayaran
             'name' => $request->name,
             'no_telp' => $request->no_telp,
             'email' => $request->email,
@@ -74,14 +82,35 @@ class PembayaranController extends Controller
             'harga' => $validated['harga'], // Harga paket
             'status' => 'pending', // Status default adalah pending
             'tanggal_pembayaran' => now(),
-            'struk' => $struk ? str_replace('public/', '', $struk) : null,
-            'user_id' => Auth::id(), // Menyimpan path file jika ada
-            
+            'struk' => $struk ? str_replace('public/', '', $struk) : null, // Menyimpan path file jika ada
         ]);
-
+    
         return redirect()->route('form.bayar')->with('success', 'Data anda berhasil disimpan. Silakan Menunggu untuk disetujui oleh Admin');
     }
 
+    public function showFormBayar(Request $request)
+{
+    try {
+        // Dekripsi parameter dari URL
+        $paket = Crypt::decryptString($request->query('paket'));
+        $harga = Crypt::decryptString($request->query('harga'));
+    } catch (\Exception $e) {
+        // Jika dekripsi gagal, redirect atau tampilkan pesan error
+        return redirect()->route('home')->withErrors(['error' => 'Parameter tidak valid.']);
+    }
+
+    // Validasi paket dan harga
+    $validPaket = ['Standard', 'Premium'];
+    $validHarga = [500000, 5000000];
+
+    if (!in_array($paket, $validPaket) || !in_array($harga, $validHarga)) {
+        return redirect()->route('home')->withErrors(['error' => 'Parameter tidak valid.']);
+    }
+
+    // Tampilkan form pembayaran dengan parameter yang valid
+    return view('form-bayar', compact('paket', 'harga'));
+}
+    
     public function showForm(Request $request)
     {
         // Ambil data dari query string

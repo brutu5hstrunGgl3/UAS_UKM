@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        Schema::create('kumpul_tugas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('jenis_paket');
-            $table->string('kelas');
-            $table->string('file', 255)->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('jenis_paket')->nullable();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('jenis_paket');
+        });
     }
 };

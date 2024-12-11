@@ -164,9 +164,12 @@
         <li class="dropdown"><a href="#"
                 data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+               @if(auth()->user()->rul == 'ADMIN')
                 <img alt="image"
+                
                     src="{{ asset('img/avatar/school.jpg') }}"
                     class="rounded-circle mr-1">
+                    @endif
                     @if(auth()->user()->rul == 'PESERTA')
                 <img alt="image"
                     src="{{ asset('img/avatar/avatar-1.png') }}"

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('kumpul_tugas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name');
-            $table->foreignId('jenis_paket')->nullable()->constrained('pembayarans')->onDelete('set null');
-            $table->string('file', 255)->nullable();
+            $table->string('judul_tugas');
+            $table->string('kelas');
+            $table->string('file')->nullable();
+            $table->date('tanggal_upload')->nullable();
 
-
-
+            $table->timestamps();
         });
     }
 

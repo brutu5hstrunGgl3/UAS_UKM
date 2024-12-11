@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kumpul_tugas', function (Blueprint $table) {
-            $table->date('tanggal_upload')->nullable();
+        Schema::table('lecturers', function (Blueprint $table) {
+            $table->string('judul_materi')->default('Judul Materi Default')->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kumpul_tugas', function (Blueprint $table) {
-            $table->dropColumn('tanggal_upload');
+        Schema::table('lecturers', function (Blueprint $table) {
+            $table->dropColumn('judul_materi');
         });
     }
 };
