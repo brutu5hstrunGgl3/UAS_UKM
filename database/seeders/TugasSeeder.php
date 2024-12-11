@@ -12,6 +12,6 @@ class TugasSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\tugas::factory(10)->create();
+        \App\Models\Tugas::factory(10)->create();
     }
 }
