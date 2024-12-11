@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class KumpulTugas extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
     protected $table = 'kumpul_tugas';
 
     protected $fillable = [
         'name',
-        'jenis_paket',
+        'judul_tugas',
         'kelas',
         'file',
         'tanggal_upload',

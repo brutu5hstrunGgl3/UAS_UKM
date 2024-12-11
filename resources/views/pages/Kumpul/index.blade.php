@@ -68,9 +68,9 @@
                                         <tr>
 
                                             <th>Name</th>
-                                            <th>Paket</th>
-                                            <th>File Tugas</th>
                                             <th>Kelas</th>
+                                            <th>Judul Tugas</th>
+                                            <th>File Tugas</th>
                                             <th>Tanggal Upload</th>
                                             <th>Action</th>
                                            
@@ -82,13 +82,13 @@
                                             {{ $tugas->name }}
                                             </td>
                                             <td>
-                                            {{ $tugas->jenis_paket }}
+                                            {{ $tugas->kelas }}
+                                            </td>
+                                            <td>
+                                            {{ $tugas->judul_tugas }}
                                             </td>
                                             <td>
                                             {{ $tugas->file }}
-                                            </td>
-                                            <td>
-                                            {{ $tugas->kelas }}
                                             </td>
                                             <td>
                                             {{ $tugas->tanggal_upload }}

@@ -20,19 +20,21 @@
 
             <div class="section-body">
                 <div class="card">
-                    <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ isset($nilai) ? route('nilai.update', $nilai->id) : route('nilai.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if(isset($nilai))
+                            @method('PUT')
+                        @endif
 
-                        <input type="hidden" name="user_id" value="{{ $user->id }}"> <!-- Pastikan ini menggunakan ID -->
+                        <input type="hidden" name="user_id" value="{{ $user->id }}"> <!-- Tetap gunakan ID peserta -->
 
                         <div class="card-header">
-                            <h4>Edit Nilai Peserta</h4>
+                            <h4>{{ isset($nilai) ? 'Edit Nilai Peserta' : 'Tambah Nilai Peserta' }}</h4>
                         </div>
                         <div class="card-body">
                             <!-- Peserta Bimbel -->
                             <div class="form-group">
                                 <label for="user_name">Peserta Bimbel</label>
-                                <!-- Menampilkan nama peserta -->
                                 <input 
                                     type="text" 
                                     name="user_name" 
@@ -40,12 +42,6 @@
                                     value="{{ $user->name }}" 
                                     class="form-control" 
                                     readonly>
-                                
-                                @error('user_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
                             </div>
 
                             <!-- Kehadiran -->
@@ -56,13 +52,8 @@
                                     name="kehadiran" 
                                     id="kehadiran" 
                                     placeholder="Kehadiran"
-                                    class="form-control @error('kehadiran') is-invalid @enderror">
-                                
-                                @error('kehadiran')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                    class="form-control @error('kehadiran') is-invalid @enderror"
+                                    value="{{ old('kehadiran', isset($nilai) ? $nilai->kehadiran : '') }}">
                             </div>
 
                             <!-- Kompetensi -->
@@ -73,13 +64,8 @@
                                     name="kompetensi" 
                                     id="kompetensi" 
                                     placeholder="Kompetensi"
-                                    class="form-control @error('kompetensi') is-invalid @enderror">
-                                
-                                @error('kompetensi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                    class="form-control @error('kompetensi') is-invalid @enderror"
+                                    value="{{ old('kompetensi', isset($nilai) ? $nilai->kompetensi : '') }}">
                             </div>
 
                             <!-- Skill -->
@@ -90,13 +76,8 @@
                                     name="skill" 
                                     id="skill" 
                                     placeholder="Skill"
-                                    class="form-control @error('skill') is-invalid @enderror">
-                                
-                                @error('skill')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                    class="form-control @error('skill') is-invalid @enderror"
+                                    value="{{ old('skill', isset($nilai) ? $nilai->skill : '') }}">
                             </div>
 
                             <!-- Status -->
@@ -107,18 +88,29 @@
                                     name="status" 
                                     id="status" 
                                     placeholder="Status"
-                                    class="form-control @error('status') is-invalid @enderror">
-                                
-                                @error('status')
+                                    class="form-control @error('status') is-invalid @enderror"
+                                    value="{{ old('status', isset($nilai) ? $nilai->status : '') }}">
+                            </div>
+
+                            <!-- Upload -->
+                            <div class="form-group">
+                                <label for="file_nilai">Upload File Nilai</label>
+                                <input 
+                                    type="file" 
+                                    name="file_nilai" 
+                                    id="file_nilai" 
+                                    class="form-control @error('file_nilai') is-invalid @enderror">
+
+                                @error('file_nilai')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+
                         </div>
-                        
                         <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{ isset($nilai) ? 'Update' : 'Submit' }}</button>
                         </div>
                     </form>
                 </div>

@@ -45,7 +45,42 @@ class KumpulTugasController extends Controller
     {
         // Validasi input
         $request->validate([
+            'judul_tugas' => 'required|string|max:255',
             'file' => 'required|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:2048', // Validasi file
+        ]);
+
+        // Upload file jika ada
+        if ($request->hasFile('file')) {
+            // Simpan file ke folder 'uploads/tugas' di penyimpanan publik
+            $filePath = $request->file('file')->store('uploads/tugas', 'public');
+        } else {
+            // Jika tidak ada file yang diunggah, tampilkan error
+            return redirect()->back()->with('error', 'File tidak ditemukan atau gagal diunggah.');
+        }
+
+        // Ambil user yang login
+        $user = Auth::user();
+
+        // Cari data kelas berdasarkan user
+        $pembayaran = $user->pembayaran()->where('status', 'Approved')->first(); // Contoh dengan filter
+        // Cek apakah data pembayaran ditemukan dan kolom jenis_paket tidak kosong
+        if (!$pembayaran || !$pembayaran->jenis_paket) {
+            // Jika tidak ada data pembayaran "Approved" atau kolom jenis_paket kosong
+            return redirect()->back()->with('error', 'Anda belum memiliki pembayaran yang disetujui.');
+        }
+
+        // Ambil data 'jenis_paket' dari pembayaran
+        $jenisPaket = $pembayaran->jenis_paket; // Hasilnya: "Premium" atau "Standar"
+
+        
+        // Simpan data ke tabel kumpul_tugas
+        KumpulTugas::create([
+            'name' => $user->name, // Nama user
+            'judul_tugas' => $request->judul_tugas, // Judul tugas dari form
+            'kelas' => $jenisPaket, // Isi kolom kelas dari jenis_paket
+            'file' => $filePath, // Lokasi file yang diupload
+            'tanggal_upload' => now(),
+
         ]);
 
         // Simpan file
@@ -53,25 +88,7 @@ class KumpulTugasController extends Controller
             $filename = $request->file('file')->getClientOriginalName();
             // Simpan file ke dalam folder 'public/tugas'
             $request->file('file')->storeAs('public/tugas', $filename);
-
-
-        $user = Auth::user();
-        $pembayaran = $user->pembayaran; // Asumsikan ada relasi pembayaran di model User
-        $jenisPaket = $pembayaran ? $pembayaran->jenis_paket : null; // Ambil jenis_paket atau null jika tidak ada pembayaran
-    
-        if (!$jenisPaket) {
-            return redirect()->back()->with('error', 'Jenis Paket tidak ditemukan untuk user ini.');
-        }
-
-        // Simpan data ke tabel
-        KumpulTugas::create([
-            'name' => Auth::user()->name, // Nama otomatis dari user yang sedang login
-            'jenis_paket' => $jenisPaket,
-            'kelas'=> $request->input('kelas'),
-            'file' => $filename,
-            'tanggal_upload' => now(),
-
-        ]);
+        
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', ' File Tugas Anda  Berhasil Dikumpulkan!');

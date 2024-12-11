@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
     public function pembayaran()
     {
-        return $this->hasMany(Pembayaran::class, 'user_id', 'id'); // Menggunakan user_id di tabel pembayarans
+        return $this->hasOne(Pembayaran::class, 'user_id', 'id'); // Menggunakan user_id di tabel pembayarans
     }
 
     public function nilai()

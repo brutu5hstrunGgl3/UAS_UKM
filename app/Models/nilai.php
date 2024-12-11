@@ -18,8 +18,8 @@ class nilai extends Model
         'kehadiran', // Status kehadiran
         'kompetensi',// Kompetensi yang dinilai
         'skill', 
-        'status',    // Skill yang dimiliki
-            // Nama file struk (jika ada)
+        'status',    
+        'file_nilai', // Pastikan ini ada
         'updated_at', 
         'created_at'
     ];

@@ -133,6 +133,11 @@
                         <a class="nav-link" href="{{route('lihatnilai.index')}}">Lihat Nilai</a>
                     </li>
                     @endif
+                    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
+                    <li>
+                        <a class="nav-link" href="{{route('lihatnilai.index')}}">Lihat Nilai</a>
+                    </li>
+                    @endif
                     @if(auth()->user()->rul == 'ADMIN')
                     <li>
                         <a class="nav-link" href="">Report Nilai</a>
