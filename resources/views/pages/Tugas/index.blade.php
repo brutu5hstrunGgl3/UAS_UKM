@@ -73,9 +73,15 @@
                                                                     </button>
                                                                 </form>
                                                                 @endif
+                                                               
                                                                 <a href="{{ route('tugas.download', $tugasItem->learning) }}" class="btn btn-sm btn-primary">
                                                                     <i class="fas fa-download"></i> Download
                                                                 </a>
+                                                                @if(auth()->user()->rul == 'PESERTA')
+                                                                <a href="{{ route('kumpul.create',['learning' => $tugasItem->learning])  }}" class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-upload"></i> Kumpul Tugas
+                                                                </a>@endif
+                                                               
                                                             </div>
                                                        
                                                     </td>

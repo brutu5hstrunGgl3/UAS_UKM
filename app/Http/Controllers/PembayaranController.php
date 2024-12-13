@@ -45,7 +45,7 @@ class PembayaranController extends Controller
     public function StorePembayaranRequest(Request $request)
     {
         // dd($request->all());
-        Log::info('Data request:', $request->all());
+        //Log::info('Data request:', $request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
@@ -117,9 +117,12 @@ class PembayaranController extends Controller
         $paket = $request->query('paket');
         $harga = $request->query('harga');
 
+         $encryptedPaket = Crypt::encrypt($paket);
+        $encryptedHarga = Crypt::encrypt($harga);
         // Kirim data ke view
         return view('pages.Pembayaran.formbayar', compact('paket', 'harga'));
     }
+    
 
     public function edit(Pembayaran $pembayaran)
 {

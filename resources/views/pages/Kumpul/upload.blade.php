@@ -65,12 +65,13 @@
                             <div class="form-group">
                                 <label for="kelas">Judul Tugas</label>
                                 <input id="judul_tugas" type="text"
-                                    class="form-control @error('name') is-invalid @enderror"
-                                    name="judul_tugas" autofocus required>
+                                    class="form-control @error('judul_tugas') is-invalid @enderror"
+                                    name="judul_tugas" autofocus required
+                                    value="{{ $learning }}" readonly required> 
                                 <div class="invalid-feedback">
                                 Please fill in your Judul Tugas.
                                 </div>
-                                @error('name')
+                                @error('judul_tugas')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

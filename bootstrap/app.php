@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\EncryptRoute;
 use App\Http\Middleware\CheckPaymentStatus;
 use App\Http\Middleware\Pemateri;
 use App\Http\Middleware\Peserta;
@@ -20,7 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'Admin'=> Admin::class,
             'Pemateri'=> Pemateri::class,
-            'Peserta'=> Peserta::class
+            'Peserta'=> Peserta::class,
+            'EncryptRoute'=> EncryptRoute::class,
         ]);
  
         

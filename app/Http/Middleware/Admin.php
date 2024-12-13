@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
 
-        $allowedRoles = ['ADMIN', 'PEMATERI'];
+        $permision = ['ADMIN', 'PEMATERI'];
 
         // Jika pengguna tidak login
         if (!$request->user()) {
@@ -30,7 +30,7 @@ class Admin
         }
 
         // Jika pengguna tidak memiliki salah satu role yang diizinkan
-        if (!in_array($request->user()->rul, $allowedRoles)) {
+        if (!in_array($request->user()->rul, $permision)) {
             abort(403, 'Unauthorized access.');
         }
 

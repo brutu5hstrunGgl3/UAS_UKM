@@ -33,9 +33,9 @@ class KumpulTugasController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('pages.Kumpul.upload' );
+    public function create(Request $request)
+    {   $learning = $request->get('learning');
+        return view('pages.Kumpul.upload',compact('learning'));
     }
 
     /**
@@ -63,7 +63,7 @@ class KumpulTugasController extends Controller
         $user = Auth::user();
 
         // Cari data kelas berdasarkan user
-        $pembayaran = $user->pembayaran()->where('status', 'Approved')->first(); // Contoh dengan filter
+        $pembayaran = $user->pembayaran::where('status', 'Approved')->first(); // Contoh dengan filter
         // Cek apakah data pembayaran ditemukan dan kolom jenis_paket tidak kosong
         if (!$pembayaran || !$pembayaran->jenis_paket) {
             // Jika tidak ada data pembayaran "Approved" atau kolom jenis_paket kosong

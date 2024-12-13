@@ -91,10 +91,10 @@
     {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
 
     @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
-        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas</a>
+        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas Anda</a>
     {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
     @elseif(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas Anda</a>
+        <a class="nav-link" href="{{ route('tugas.index') }}">Lihat Tugas </a>
 
    
     @endif
@@ -105,12 +105,7 @@
 <li>
     {{-- Jika pengguna adalah PESERTA, hanya dapat mengakses jika sudah membayar --}}
 
-    @if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
-        <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
-    {{-- Jika pengguna adalah ADMIN atau PEMATERI, tidak perlu validasi pembayaran --}}
-    @elseif(auth()->user()->rul == 'ADMIN')
-    <a class="nav-link" href="{{ route('kumpul.create') }}">Kumpul Tugas</a>
-    @endif
+   
     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
     <a class="nav-link" href="{{ route('kumpul.index') }}">Lihat Tugas Peserta</a>
 @endif
