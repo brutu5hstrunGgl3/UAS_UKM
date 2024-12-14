@@ -33,12 +33,11 @@
                                                 <td>{{ $pembayaran->name }}</td>
                                                 <td>{{ $pembayaran->jenis_paket }}</td>
                                                 <td>Rp. {{ number_format($pembayaran->harga, 0, ',', '.') }}</td>
-                                                <td>{{ $pembayaran->created_at->format('d M Y H:i') }}</td>
+                                                <td>{{ $pembayaran->created_at->format('d M Y') }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                    <a href="#" class="btn btn-sm btn-primary mr-2 btn-print" data-id="{{ $pembayaran->id }}">
-                                                        <i class="fas fa-print"></i> Print
-                                                    </a>
+                                                       
+                                                        <a href="{{ route('history.pdf') }}?nama={{ request()->nama }}" class="btn btn-success"> <i class="fas fa-print"></i>Download PDF </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -52,6 +51,7 @@
                             </div>
                             <div class="float-right">
                                 {{ $pembayarans->withQueryString()->links() }}
+                               
                             </div>
                         </div>
                     </div>

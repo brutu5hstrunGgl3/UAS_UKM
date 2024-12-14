@@ -84,36 +84,23 @@ class PembayaranController extends Controller
             'tanggal_pembayaran' => now(),
             'struk' => $struk ? str_replace('public/', '', $struk) : null, // Menyimpan path file jika ada
         ]);
-    
-        return redirect()->route('form.bayar')->with('success', 'Data anda berhasil disimpan. Silakan Menunggu untuk disetujui oleh Admin');
+        $paket = $validated['jenis_paket'];
+        $harga = $validated['harga'];
+
+        $encryptedPaket = Crypt::encryptString($paket);
+        $encryptedHarga = Crypt::encryptString($harga);
+        return redirect()->route('form.bayar', [
+            'paket' => $encryptedPaket,
+            'harga' => $encryptedHarga,
+        ])->with('success', 'Data anda berhasil disimpan. Silakan Menunggu untuk disetujui oleh Admin'); 
+        // Redirect ke halaman form bayarreturn redirect()->route('form.bayar')->with('success', 'Data anda berhasil disimpan. Silakan Menunggu untuk disetujui oleh Admin');
     }
 
-    public function showFormBayar(Request $request)
-{
-    try {
-        // Dekripsi parameter dari URL
-        $paket = Crypt::decryptString($request->query('paket'));
-        $harga = Crypt::decryptString($request->query('harga'));
-    } catch (\Exception $e) {
-        // Jika dekripsi gagal, redirect atau tampilkan pesan error
-        return redirect()->route('home')->withErrors(['error' => 'Parameter tidak valid.']);
-    }
-
-    // Validasi paket dan harga
-    $validPaket = ['Standard', 'Premium'];
-    $validHarga = [500000, 5000000];
-
-    if (!in_array($paket, $validPaket) || !in_array($harga, $validHarga)) {
-        return redirect()->route('home')->withErrors(['error' => 'Parameter tidak valid.']);
-    }
-
-    // Tampilkan form pembayaran dengan parameter yang valid
-    return view('form-bayar', compact('paket', 'harga'));
-}
+//     
     
     public function showForm(Request $request)
     {
-        // Ambil data dari query string
+    //bil data dari query string
         $paket = $request->query('paket');
         $harga = $request->query('harga');
 
@@ -201,10 +188,6 @@ public function download($id)
 
     
 }
-
-
-
-
     public function destroy(Pembayaran $pembayaran)
     {
         $pembayaran->delete();

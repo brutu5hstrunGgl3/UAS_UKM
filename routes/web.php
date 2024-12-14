@@ -115,6 +115,7 @@ Route::middleware(Peserta::class)->group(function () {
     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index'); 
     Route::resource('kumpul', KumpulTugasController::class);
     
+    
 });
 
 Route::post('/bayar', [PembayaranController::class, 'StorePembayaranRequest'])->name('pembayaran.store');
@@ -124,7 +125,7 @@ Route::group(['middleware' => ['auth', 'Peserta']], function() {
       
  });
  
- Route::get('/form.bayar', [PembayaranController::class, 'showForm'])->name('form.bayar');
+ 
  Route::get('/Pembayaran/export', function () {
     return Excel::download(new PembayaranExport, 'Pembayaran.xlsx');
 })->name('Pembayaran.export');
@@ -141,6 +142,7 @@ Route::get('kumpul/download/{id}', [KumpulTugasController::class, 'download'])->
 
 Route::middleware('auth', Peserta::class)->group(function () {
     Route::resource('tugas', TugasController::class)->only('index');
+   
 });
 
 
@@ -165,7 +167,9 @@ Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/nilai/{id}/download', [NilaiController::class, 'download'])->name('nilai.download');
 
     Route::get('/pembayaran/history', [HistoryController::class, 'history'])->name('history.pembayaran');
-   
+    Route::get('/history/pdf', [HistoryController::class, 'exportToPDF'])->name('history.pdf');
+    Route::get('/form.bayar', [PembayaranController::class, 'showForm'])->name('form.bayar');
+    // Route::get('/form.bayar', [PembayaranController::class, 'formBayar'])->name('form.bayar');
     // Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
  
     

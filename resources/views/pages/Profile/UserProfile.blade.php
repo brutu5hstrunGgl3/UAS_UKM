@@ -94,7 +94,7 @@
                                 </div>
 
                                 <div class="card-footer text-right">
-                                    <a href="{{ route('password.change') }}" class="btn btn-primary">Ganti Password</a>
+                                    <a href="{{ route('password.request') }}" class="btn btn-primary">Ganti Password</a>
                                 </div>
 
                             </form>

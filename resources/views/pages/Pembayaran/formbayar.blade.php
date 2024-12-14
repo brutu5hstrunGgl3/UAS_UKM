@@ -84,7 +84,10 @@
                             <div class="form-group">
                                 <label for="harga">Harga</label>
                                 <!-- Tampilkan harga dengan format mata uang di input text -->
-                                <input type="text" id="formatted-harga" value="{{ number_format($harga, 0, ',', '.') }}" class="form-control" readonly>
+                                @php
+                                    $hargaFormatted = is_numeric($harga) ? number_format((float)$harga, 0, ',', '.') : 0;
+                                @endphp
+                                <input type="text" id="formatted-harga" value="{{$hargaFormatted }}" class="form-control" readonly>
                                 <!-- Hidden input untuk menyimpan harga dalam format angka -->
                                 <input type="hidden" name="harga" value="{{$harga }}">
                             </div>
