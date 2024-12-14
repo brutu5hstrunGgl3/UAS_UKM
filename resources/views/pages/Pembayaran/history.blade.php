@@ -9,6 +9,10 @@
 @section('main')
     <div class="main-content">
         <section class="section">
+        <div class="section-header">
+            <h1>History Pembayaran</h1>
+                
+            </div>
             @include('layouts.alert')
 
             <div class="row mt-5">

@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
     public function history(Request $request)
     {
+        $user_id = Auth::id();
         // Query untuk mengambil data pembayaran
-        $pembayarans = Pembayaran::when($request->nama, function ($query, $nama) {
+        $pembayarans = Pembayaran::where('user_id', $user_id)
+        ->when($request->nama, function ($query, $nama) {
             // Jika ada parameter pencarian
             return $query->where('name', 'like', '%' . $nama . '%');
         })
         ->latest() // Urutkan dari yang terbaru
-        ->paginate(10); // Tampilkan 10 data per halaman
+        ->paginate(10); // Tampilkan 10 data per halaman // Tampilkan 10 data per halaman
 
         return view('pages.Pembayaran.history', compact('pembayarans'));
     }
@@ -24,7 +27,11 @@ class HistoryController extends Controller
     public function exportToPDF(Request $request)
     {
         // Query untuk mengambil data pembayaran
-        $pembayarans = Pembayaran::when($request->nama, function ($query, $nama) {
+        $user_id = Auth::id();
+
+    // Query untuk mengambil data pembayaran milik pengguna yang login
+    $pembayarans = Pembayaran::where('user_id', $user_id)
+        ->when($request->nama, function ($query, $nama) {
             return $query->where('name', 'like', '%' . $nama . '%');
         })
         ->latest() // Urutkan dari yang terbaru
@@ -35,8 +42,8 @@ class HistoryController extends Controller
             'alamat' => 'Bantilang Kab.Luwu timur , Provinsi Sulawesi Selatan, Indonesia.',
             'telepon'=> '+628123456789',
             'email' => 'komputer77@bimbel.com',
-            'website' => 'www.komputer77.com',
-            'logo' => asset('public/img/payment/jcb.png'), // Ganti dengan path ke logo perusahaan Anda
+            'website' => 'www.lmskomputer77.co.id',
+             // Ganti dengan path ke logo perusahaan Anda
         ]; 
         // Ambil semua data untuk PDF
 

@@ -6,14 +6,14 @@
     <title>Invoice</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: Helvetica, sans-serif;
+            margin: none ;
             position: relative; /* Posisi relatif untuk watermark */
         }
         .container {
             max-width: 600px;
             margin: auto;
-            border: 1px solid #ccc;
+            border: none ;
             border-radius: 5px;
             padding: 20px;
             box-shadow: 0 0 10px  rgba(255, 255, 255, 0.9);
@@ -79,16 +79,23 @@
 </head>
 <body>
     <div class="container">
-        <img src="{{ $dataPerusahaan['logo'] }}" alt="Watermark" class="watermark" style="width: 50px;"> <!-- Watermark logo -->
+       <!-- Watermark logo -->
         <div class="header">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/komputer 77.jpg'))) }}" 
+     alt="Watermark" 
+     style="width: 200px; height: auto; float: right; margin-left: 10px;">
     <h1>Invoice</h1>
     <p><strong>{{ $dataPerusahaan['nama'] }}</strong></p>
     <p style="font-size: 12px;">{{ $dataPerusahaan['alamat'] }}</p> <p style="font-size: 12px;">WhatsApp : {{ $dataPerusahaan['telepon'] }}</p>
     <p style="font-size: 12px;">Email:{{ $dataPerusahaan['email'] }}</p>
     <p style="font-size: 12px;">Website: {{ $dataPerusahaan['website'] }}</p>
+    <hr style="border: none; border-top: 1px solid #000; margin-top: 10px;">
 </div>
+<table>
+  
 
-        <table>
+    </table>    
+    <table>
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -98,6 +105,7 @@
                 </tr>
             </thead>
             <tbody>
+            
                 @php
                     $total = 0; // Inisialisasi total
                 @endphp
@@ -121,5 +129,7 @@
             <p>Semua transaksi telah tercatat dengan baik. Jika ada kesalahan, silakan hubungi customer service kami.</p>
         </div>
     </div>
+  
+
 </body>
 </html>
