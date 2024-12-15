@@ -40,7 +40,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <form method="GET" action="{{ route('nilai.index') }}">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name" value="{{ request('name') }}">
+                                            <input type="text" class="form-control" placeholder="Search" name="name" >
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>

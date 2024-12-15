@@ -8,6 +8,7 @@ use App\Models\nilai;
 use App\Http\Requests\StoreNilaiRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Imports\NilaiImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class NilaiController extends Controller
     //index
     public function index(Request $request)
     {
+        
         // Mengambil data pengguna dan nilai terkait
         $users = User::with('nilai') // Mengambil relasi nilai
         ->where('rul', 'PESERTA') // Hanya user dengan rul 'PESERTA'
@@ -35,7 +37,7 @@ class NilaiController extends Controller
 
     public function edit($id)
     {
-    $nilai = Nilai::findOrFail($id);
+    $nilai = nilai::findOrFail($id);
     $user = $nilai->user; // Asumsikan relasi Nilai ke User sudah dibuat
     return view('pages.nilai.create', compact('nilai', 'user')); // Gunakan view yang sama dengan create
     }
@@ -49,18 +51,10 @@ class NilaiController extends Controller
             'status' => 'required',
         ]);
     
-        $nilai = Nilai::findOrFail($id);
+        $nilai = nilai::findOrFail($id);
     
         // Jika ada file baru di-upload
-        if ($request->hasFile('file_nilai')) {
-            // Hapus file lama jika ada
-            if ($nilai->file_nilai) {
-                Storage::delete('public/' . $nilai->file_nilai);
-            }
-            // Simpan file baru
-        $filePath = $request->file('file_nilai')->store('public/nilai');
-        $validatedData['file_nilai'] = str_replace('public/', '', $filePath);
-    }
+      
         $nilai->update($validatedData);
         return redirect()->route('nilai.index')->with('success', 'Data nilai berhasil diperbarui.');
     }
@@ -110,21 +104,37 @@ class NilaiController extends Controller
     return redirect()->route('nilai.index')->with('success', 'Data berhasil disimpan.');
 }
 
-public function download($id)
+
+public function downloadCertificate($id)
 {
-    $nilai = Nilai::findOrFail($id); // Pastikan model Nilai diimport di controller
-    $filePath = storage_path('app/public/' . $nilai->file_nilai);
+    // Ambil data nilai berdasarkan ID
+    $nilai = nilai::findOrFail($id);
 
-    if (file_exists($filePath)) {
-        return response()->download($filePath);
-    }
+    // Path ke template sertifikat
+    $templatePath = public_path('sertifikat/sertifikat.jpg');
 
-    return redirect()->back()->with('error', 'File tidak ditemukan.');
+    // Data yang akan ditampilkan di sertifikat
+    $data = [
+        'name' => $nilai->name, // Ambil nama dari database
+        'date' => date('d F Y'), // Tanggal hari ini
+        'kehadiran' => $nilai->kehadiran,
+        'kompetensi' => $nilai->kompetensi,
+        'skill' => $nilai->skill,
+        'templatePath' => asset('sertifikat/sertifikat.jpg'), // URL gambar untuk dompdf
+    ];
+
+    // Buat file PDF dari view template
+    $pdf = PDF::loadView('pages.nilai.template', compact('data'))
+              ->setPaper('a4', 'landscape'); // Sesuaikan ukuran kertas dan orientasi
+
+    // Generate output PDF
+    return $pdf->download('certificate-' . $nilai->name . '.pdf');
 }
+
 
 public function destroy($id)
 {
-    $nilai = Nilai::findOrFail($id);
+    $nilai = nilai::findOrFail($id);
 
     try {
         $nilai->delete(); // Hapus data

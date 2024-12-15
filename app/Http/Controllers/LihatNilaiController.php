@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LihatNilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LihatNilaiController extends Controller
 {
@@ -14,7 +15,7 @@ class LihatNilaiController extends Controller
     public function index(Request $request)
 {
     // Jika admin atau pemateri, tampilkan semua data
-    if (auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI') {
+    if (Auth::user()->rul == 'ADMIN' || Auth::user()->rul == 'PEMATERI') {
         $nilais = DB::table('nilais')
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
@@ -24,7 +25,7 @@ class LihatNilaiController extends Controller
     } else {
         // Untuk user biasa, hanya tampilkan data miliknya sendiri
         $nilais = DB::table('nilais')
-            ->where('user_id', auth()->id())
+            ->where('user_id', Auth::id())
             ->when($request->input('name'), function ($query, $name) {
                 return $query->where('name', 'like', '%' . $name . '%');
             })

@@ -93,13 +93,7 @@
                             </div>
 
                             <!-- Upload -->
-                            <div class="form-group">
-                                <label for="file_nilai">Upload File Nilai</label>
-                                <input 
-                                    type="file" 
-                                    name="file_nilai" 
-                                    id="file_nilai" 
-                                    class="form-control @error('file_nilai') is-invalid @enderror">
+                            
 
                                 @error('file_nilai')
                                     <div class="invalid-feedback">

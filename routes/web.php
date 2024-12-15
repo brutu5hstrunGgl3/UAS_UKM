@@ -142,6 +142,9 @@ Route::get('kumpul/download/{id}', [KumpulTugasController::class, 'download'])->
 
 Route::middleware('auth', Peserta::class)->group(function () {
     Route::resource('tugas', TugasController::class)->only('index');
+    Route::get('/nilai/download/{id}', [NilaiController::class, 'downloadCertificate'])->name('nilai.downloadCertificate');
+    Route::get('/lihatnilai', [LihatNilaiController::class, 'index'])->name('lihatnilai.index');
+    
    
 });
 
@@ -149,14 +152,11 @@ Route::middleware('auth', Peserta::class)->group(function () {
 
 Route::middleware(['auth', 'Admin'])->group(function () {
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');});
-    
-
    
-
    
 // Rute untuk menyimpan nilai
     Route::post('/nilai/store', [NilaiController::class, 'store'])->name('nilai.store');
-    Route::get('/lihatnilai', [LihatNilaiController::class, 'index'])->name('lihatnilai.index');
+  
 // Rute untuk menghapus nilai
    
     
@@ -164,14 +164,16 @@ Route::middleware(['auth', 'Admin'])->group(function () {
         return view('pages.auth.auth-ganti-password');
     })->name('password.change');
 
-    Route::get('/nilai/{id}/download', [NilaiController::class, 'download'])->name('nilai.download');
+    
 
     Route::get('/pembayaran/history', [HistoryController::class, 'history'])->name('history.pembayaran');
     Route::get('/history/pdf', [HistoryController::class, 'exportToPDF'])->name('history.pdf');
     Route::get('/form.bayar', [PembayaranController::class, 'showForm'])->name('form.bayar');
     // Route::get('/form.bayar', [PembayaranController::class, 'formBayar'])->name('form.bayar');
     // Route::post('tugas', [TugasController::class, 'store'])->name('tugas.store');
- 
+   
+   
+
     
   
 

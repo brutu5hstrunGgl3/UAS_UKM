@@ -72,13 +72,12 @@
                                                     <td>{{ $user->skill ?? 'Belum Diisi' }}</td> <!-- Skill -->
                                                     <td>{{ $user->status ?? 'Belum Diisi' }}</td> <!-- Status -->
                                                     <td>
-                                                        @if(!empty($user->file_nilai))
-                                                            <a href="{{ asset('storage/' . $user->file_nilai) }}" class="btn btn-sm btn-primary btn-icon" download>
-                                                                <i class="fas fa-download"></i> File Sertifikat
-                                                            </a>
-                                                        @else
-                                                            <span class="text-danger">Belum Ada</span>
-                                                        @endif
+                                                   
+                                                        <a href="{{ route('nilai.downloadCertificate', $user->id) }}" class="btn btn-sm btn-primary btn-icon">
+                                                            <i class="fas fa-download"></i> File Sertifikat
+                                                        </a>
+                                                      
+                                                       
                                                     </td>
                                                     <td>
                                                     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
@@ -103,7 +102,7 @@
                                         </tbody>
                                     </table>
                                     <div class="float-right">
-                                        {{ $nilais ->withQueryString()->links() }}
+                                        {{ $nilais->withQueryString()->links() }}
                                     </div>
                                 </div>
                             </div>
