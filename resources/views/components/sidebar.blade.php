@@ -133,11 +133,7 @@
                         <a class="nav-link" href="{{route('lihatnilai.index')}}">Lihat Nilai</a>
                     </li>
                     @endif
-                    @if(auth()->user()->rul == 'ADMIN')
-                    <li>
-                        <a class="nav-link" href="">Report Nilai</a>
-                    </li>
-                    @endif
+                  
                 </ul>
             </li>
 
@@ -148,9 +144,7 @@
                     <i class="fas fa-folder"></i><span>Laporan</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="">Pendaftaran Peserta</a>
-                    </li>
+                   
                     <li>
                         <a class="nav-link" href="{{ route('pembayaran.index') }}">Pembayaran Bimbel</a>
                     </li>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'LMS Sekolah Dasar Negeri')
+@section('title', 'LMS Komputer 77')
 
 @push('style')
     <!-- CSS Libraries -->

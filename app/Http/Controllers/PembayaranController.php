@@ -52,7 +52,7 @@ class PembayaranController extends Controller
             'email' => 'required|email|max:255',
             'jenis_paket' => 'required|string|in:Standard,Premium', // Hanya jenis paket yang diizinkan
             'harga' => 'required|numeric', // Validasi dasar harga
-            'struk' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
+            'struk' => 'required|nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // Validasi file bukti pembayaran
         ]);
     
         // Validasi harga berdasarkan jenis_paket

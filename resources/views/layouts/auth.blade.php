@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
         name="viewport">
     <title>@yield('title') &mdash; Lms Bimbingan Belajar Akupintar </title>
+    <link rel="icon" href="{{ asset('img/komputer 77.jpg') }}" type="image/x-icon">
 
     <!-- General CSS Files -->
     <link rel="stylesheet"

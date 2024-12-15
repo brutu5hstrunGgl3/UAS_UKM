@@ -35,7 +35,7 @@
                                 <div class="pricing-details">
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Pembelajaran Lebih Lama dengan Harga yang Lebih Murah</div>
+                                        <div class="pricing-item-label">Pembelajaran dibimbing langsung di tempat Peserta bimbel</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
@@ -43,11 +43,15 @@
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
-                                        <div class="pricing-item-label">Materi bisa di Customisasi</div>
+                                        <div class="pricing-item-label">Materi bisa di kustomisasi</div>
                                     </div>
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                         <div class="pricing-item-label">Akses Materi dari dasar hingga mahir</div>
+                                    </div>
+                                    <div class="pricing-item">
+                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                        <div class="pricing-item-label">Syarat dan ketentuan berlaku</div>
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +96,10 @@
                                     <div class="pricing-item">
                                         <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
                                         <div class="pricing-item-label">Cocok untuk Belajar dengan Tujuan Tertentu</div>
+                                    </div>
+                                    <div class="pricing-item">
+                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                        <div class="pricing-item-label">Syarat dan ketentuan berlaku</div>
                                     </div>
                                 </div>
                             </div>

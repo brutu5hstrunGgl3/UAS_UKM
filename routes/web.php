@@ -83,7 +83,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::resource('tugas', TugasController::class);
     Route::resource('absensi', AttendanceController::class);
     Route::get('/nilai/{id}/create', [NilaiController::class, 'create'])->name('nilai.create');
-   
+    Route::resource('kumpul', KumpulTugasController::class);
+
     Route::prefix('admin')->group(function () {
     });
     
@@ -97,14 +98,13 @@ Route::middleware(Admin::class)->group(function () {
     Route::get('/nilai/{id}/edit', [NilaiController::class, 'edit'])->name('nilai.edit');
     Route::put('/nilai/{id}', [NilaiController::class, 'update'])->name('nilai.update');
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
-   
-
+    
 Route::middleware(Pemateri::class)->group(function () {
     Route::resource('absensi', AttendanceController::class);
     
     Route::get('/nilai/{id}/edit', [NilaiController::class, 'edit'])->name('nilai.edit');
     Route::put('/nilai/{id}', [NilaiController::class, 'update'])->name('nilai.update');
-    
+    Route::resource('kumpul', KumpulTugasController::class);
 });
 });
 
@@ -113,7 +113,7 @@ Route::middleware(Peserta::class)->group(function () {
    
     Route::get('/formbayar/download/{id}', [PembayaranController::class, 'download'])->name('formbayar.download');
     Route::get('/materi', [LecturerController::class, 'index'])->name('materi.index'); 
-    Route::resource('kumpul', KumpulTugasController::class);
+  
     
     
 });
