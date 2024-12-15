@@ -65,37 +65,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($lecturers as $lecturer)
-                                            <tr>
-                                                <td>{{ $lecturer->name }}</td>
-                                                <td>{{ $lecturer->position }}</td>
-                                                <td> {{$lecturer->judul_materi}}</td>
-                                                <td>
-                                                    <a href="{{ $lecturer->materi }}" class="url" style="color: gray; text-decoration: none;">
-                                                        {{ $lecturer->materi }}
-                                                    </a>
-                                                </td>
-                                                <td>{{ $lecturer->jadwal }}</td>
-                                                <td>
-                                                    
-
-                                                        @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-                                                            <a href="{{ route('lecturer.edit', $lecturer->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
-                                                                <i class="fas fa-edit"></i> Edit
-                                                            </a>
-                                                            <form action="{{ route('lecturer.destroy', $lecturer->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="d-inline">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn btn-sm btn-danger btn-icon">
-                                                                    <i class="fas fa-times"></i> Delete
-                                                                </button>
-                                                            </form>
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
+        @foreach ($lecturers as $lecturer)
+            <tr>
+                <td>{{ $lecturer->name }}</td>
+                <td>{{ $lecturer->position }}</td>
+                <td>{{ $lecturer->judul_materi }}</td>
+                <td>
+                    <a href="{{ $lecturer->materi }}" class="url" style="color: gray; text-decoration: none;">
+                        {{ $lecturer->materi }}
+                    </a>
+                </td>
+                <td>{{ $lecturer->jadwal }}</td>
+                <td>
+                    @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('lecturer.edit', $lecturer->id) }}" class="btn btn-sm btn-info">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('lecturer.destroy', $lecturer->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-times"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
                                 </table>
                             </div>
 

@@ -65,5 +65,7 @@ class User extends Authenticatable
 {
     return $this->hasMany(nilai::class, 'user_id', 'id'); // Menghubungkan id di tabel users ke user_id di tabel nilai
 }
+
+
     
 }

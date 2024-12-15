@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KumpulTugas;
+use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log; 
@@ -20,8 +21,8 @@ class KumpulTugasController extends Controller
         $name = $request->input('name');
         $kelas = $request->input('kelas');
         $kumpul_tugas = DB::table('kumpul_tugas')
-        ->when($request->input('name'), function ($query, $name) {
-            return $query->where('name', 'like', '%' . $name . '%');
+        ->when($request->input('kelas'), function ($query, $kelas) {
+            return $query->where('kelas', 'like', '%' . $kelas . '%');
         })
         //->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
         ->orderBy('id', 'desc')
@@ -63,16 +64,17 @@ class KumpulTugasController extends Controller
         $user = Auth::user();
 
         // Cari data kelas berdasarkan user
-        $pembayaran = $user->pembayaran::where('status', 'Approved')->first(); // Contoh dengan filter
+        $pembayaran = $user()->pembayaran()->where('status', 'Approved')->first(); // Contoh dengan filter
         // Cek apakah data pembayaran ditemukan dan kolom jenis_paket tidak kosong
         if (!$pembayaran || !$pembayaran->jenis_paket) {
             // Jika tidak ada data pembayaran "Approved" atau kolom jenis_paket kosong
             return redirect()->back()->with('error', 'Anda belum memiliki pembayaran yang disetujui.');
         }
 
+
         // Ambil data 'jenis_paket' dari pembayaran
         $jenisPaket = $pembayaran->jenis_paket; // Hasilnya: "Premium" atau "Standar"
-
+        Log::info('Jenis Paket:', ['jenis_paket' => $jenisPaket]);
         
         // Simpan data ke tabel kumpul_tugas
         KumpulTugas::create([
@@ -94,7 +96,7 @@ class KumpulTugasController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Tugas Anda  Berhasil Dikumpulkan!');
     }
-}
+    }
    
 public function download($id)
 {

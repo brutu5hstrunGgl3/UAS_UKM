@@ -22,8 +22,8 @@ class PembayaranController extends Controller
 
     {
         $pembayarans = DB::table('pembayarans')
-        ->when($request->input('name'), function ($query, $name) {
-            return $query->where('name', 'like', '%' . $name . '%');
+        ->when($request->input('jenis_paket'), function ($query, $jenis_paket) {
+            return $query->where('jenis_paket', 'like', '%' . $jenis_paket . '%');
         })
         //->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
         ->orderBy('id', 'desc')
