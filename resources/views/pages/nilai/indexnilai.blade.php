@@ -39,11 +39,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <form method="GET" action="{{ route('nilai.index') }}">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name" value="{{ request('name') }}">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                            </div>
+                                        
                                         </div>
                                     </form>
                                 </div>
@@ -81,9 +77,6 @@
                                                     </td>
                                                     <td>
                                                     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
-                                                        <a href="{{ route('nilai.edit', $user->id) }}" class="btn btn-sm btn-info btn-icon mr-2">
-                                                            <i class="fas fa-edit"></i> Edit
-                                                        </a>
                                                         <form action="{{ route('nilai.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

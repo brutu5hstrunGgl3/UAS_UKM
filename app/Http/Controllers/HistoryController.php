@@ -40,7 +40,7 @@ class HistoryController extends Controller
         $dataPerusahaan = [
             'nama' => 'Komputer 77',
             'alamat' => 'Bantilang Kab.Luwu timur , Provinsi Sulawesi Selatan, Indonesia.',
-            'telepon'=> '+628123456789',
+            'telepon'=> '085333756997',
             'email' => 'komputer77@bimbel.com',
             'website' => 'www.lmskomputer77.co.id',
              // Ganti dengan path ke logo perusahaan Anda

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KumpulTugas;
-use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log; 
@@ -16,20 +15,31 @@ class KumpulTugasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index( Request $request)
+    public function index(Request $request)
     {
-        $name = $request->input('name');
+        // Ambil input filter dari request
         $kelas = $request->input('kelas');
+    
+        // Ambil user yang sedang login
+        $user = Auth::user();
+    
+        // Query kumpul_tugas
         $kumpul_tugas = DB::table('kumpul_tugas')
-        ->when($request->input('kelas'), function ($query, $kelas) {
-            return $query->where('kelas', 'like', '%' . $kelas . '%');
-        })
-        //->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
-        ->orderBy('id', 'desc')
-        ->paginate(10);
-
-        return view('pages.Kumpul.index',compact('kumpul_tugas'));
+            ->when($user->rul !== 'ADMIN' && $user->rul !== 'PEMATERI', function ($query) use ($user) {
+                // Jika bukan admin/pemateri, filter hanya tugas milik user
+                return $query->where('name', $user->name);
+            })
+            ->when($kelas, function ($query, $kelas) {
+                // Filter berdasarkan kelas jika ada input
+                return $query->where('kelas', 'like', '%' . $kelas . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+    
+        // Return view dengan data tugas
+        return view('pages.Kumpul.index', compact('kumpul_tugas'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -64,7 +74,7 @@ class KumpulTugasController extends Controller
         $user = Auth::user();
 
         // Cari data kelas berdasarkan user
-        $pembayaran = $user()->pembayaran()->where('status', 'Approved')->first(); // Contoh dengan filter
+        $pembayaran = $user->pembayaran()->where('status', 'Approved')->first(); // Contoh dengan filter
         // Cek apakah data pembayaran ditemukan dan kolom jenis_paket tidak kosong
         if (!$pembayaran || !$pembayaran->jenis_paket) {
             // Jika tidak ada data pembayaran "Approved" atau kolom jenis_paket kosong
@@ -78,7 +88,7 @@ class KumpulTugasController extends Controller
         
         // Simpan data ke tabel kumpul_tugas
         KumpulTugas::create([
-            'name' => $user->name, // Nama user
+            'name' => Auth::user()->name,// Nama user
             'judul_tugas' => $request->judul_tugas, // Judul tugas dari form
             'kelas' => $jenisPaket, // Isi kolom kelas dari jenis_paket
             'file' => $filePath, // Lokasi file yang diupload

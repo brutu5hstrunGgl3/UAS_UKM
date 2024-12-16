@@ -16,10 +16,10 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'admin',
-            'email' => 'adminakupintar@admin.com',
+            'email' => 'komputer77@admin.lms',
             'rul' => 'ADMIN',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('lms#123321'),
             
 
         ]);

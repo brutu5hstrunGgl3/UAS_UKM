@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
@@ -12,8 +12,9 @@ class DashboardAdminController extends Controller
     public function index()
     {
          
+        $pesertaCount = User::where('rul', 'PESERTA')->count();
 
-        return view('pages.app.dashboard_admin');
+        return view('pages.app.dashboard_admin', compact('pesertaCount'));
     }
 
     /**

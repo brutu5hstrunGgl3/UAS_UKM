@@ -109,6 +109,11 @@
     @if(auth()->user()->rul == 'ADMIN' || auth()->user()->rul == 'PEMATERI')
     <a class="nav-link" href="{{ route('kumpul.index') }}">Lihat Tugas Peserta</a>
 @endif
+
+@if(auth()->user()->rul == 'PESERTA' && $pembayaran && $pembayaran->status == 'Approved')
+    <a class="nav-link" href="{{ route('kumpul.index') }}">History Tugas</a>
+@endif
+    
     
 </li>
                 </ul>

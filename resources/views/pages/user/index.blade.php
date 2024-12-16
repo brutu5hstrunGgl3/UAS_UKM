@@ -15,7 +15,7 @@
                 <h1>Learning module system</h1>
                 <div class="section-header-button">
                     <a href="{{ route('user.create') }}"
-                        class="btn btn-primary">Add New</a>
+                        class="btn btn-primary">Tambah User</a>
                 </div>
                 <div class="section-header-breadcrumb">
                    

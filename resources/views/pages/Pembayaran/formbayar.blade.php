@@ -97,9 +97,7 @@
                                             <i class="fas fa-times"></i> Cancel
                                         </a>
                                     </div>
-                                    <button class="btn btn-warning btn-icon icon-left">
-                                        <i class="fas fa-print"></i> Print
-                                    </button>
+                                    
                                 </div>
                             </form>
                         </div>

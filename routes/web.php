@@ -83,7 +83,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::resource('tugas', TugasController::class);
     Route::resource('absensi', AttendanceController::class);
     Route::get('/nilai/{id}/create', [NilaiController::class, 'create'])->name('nilai.create');
-    Route::resource('kumpul', KumpulTugasController::class);
+   
+   
 
     Route::prefix('admin')->group(function () {
     });
@@ -104,7 +105,7 @@ Route::middleware(Pemateri::class)->group(function () {
     
     Route::get('/nilai/{id}/edit', [NilaiController::class, 'edit'])->name('nilai.edit');
     Route::put('/nilai/{id}', [NilaiController::class, 'update'])->name('nilai.update');
-    Route::resource('kumpul', KumpulTugasController::class);
+    
 });
 });
 
@@ -136,16 +137,17 @@ Route::group(['middleware' => ['auth', 'Peserta']], function() {
 
 
 
-//Route::('kumpul/create', [KumpulTugasController::class, 'create'])->name('kumpul.create');
 
-Route::get('kumpul/download/{id}', [KumpulTugasController::class, 'download'])->name('kumpul.download');
+
+
 
 Route::middleware('auth', Peserta::class)->group(function () {
     Route::resource('tugas', TugasController::class)->only('index');
     Route::get('/nilai/download/{id}', [NilaiController::class, 'downloadCertificate'])->name('nilai.downloadCertificate');
     Route::get('/lihatnilai', [LihatNilaiController::class, 'index'])->name('lihatnilai.index');
-    
-   
+    Route::get('kumpul/download/{id}', [KumpulTugasController::class, 'download'])->name('kumpul.download');
+    Route::resource('kumpul', KumpulTugasController::class);
+  
 });
 
 
