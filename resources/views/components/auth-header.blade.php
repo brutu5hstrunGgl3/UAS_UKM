@@ -1,6 +1,7 @@
  <div class="login-brand">
-     <img src="{{ asset('img/komputer 77.jpg') }}"
+     <img src="{{ asset('img/komputer_77.png') }}"
          alt="logo"
          width="250"
-         class="shadow-light rounded-circle">
+            
+         >
  </div>

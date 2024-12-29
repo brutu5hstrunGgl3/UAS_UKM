@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="landing/css/bootstrap.css" />
+    <link href="landing/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="landing/css/responsive.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer 77 - Bimbel Online Komputer</title>
     <link rel="icon" href="{{ asset('img/komputer 77.jpg') }}" ">
@@ -196,7 +202,7 @@ nav a:hover {
 .contact-container h2 {
     margin-bottom: 20px;
     font-size: 28px;
-    color: #0033cc;
+    color:rgb(17, 17, 19);
 }
 
 .contact-details {
@@ -225,7 +231,7 @@ nav a:hover {
 
 .contact-item i {
     font-size: 28px;
-    color: #0033cc;
+    color:rgb(55, 56, 58);
     flex-shrink: 0;
 }
 
@@ -235,14 +241,14 @@ nav a:hover {
 }
 
 .contact-item a {
-    color: #0033cc;
+    color:rgb(52, 52, 53);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 .contact-item a:hover {
-    color: #ff6600;
+    color:rgb(0, 102, 255);
 }
 
 
@@ -421,33 +427,121 @@ nav a:hover {
             <a href="{{route('login')}}" class="cta-button">Mulai Belajar Sekarang</a>
         </div>
     </section>
-
-    <section class="features" id="program">
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Pembelajaran Online</h3>
-                <p>Belajar dari mana saja dan kapan saja dengan materi yang dapat diakses 24/7</p>
-            </div>
-            <div class="feature-card">
-                <h3>Pemateri Profesional</h3>
-                <p>Dibimbing langsung oleh praktisi IT berpengalaman di bidangnya</p>
-            </div>
-            <div class="feature-card">
-                <h3>Materi Terstruktur</h3>
-                <p>Kurikulum dirancang sistematis dari dasar hingga mahir</p>
-            </div>
+    <section class="do_section layout_padding" id="program">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Kelas Bimbel Computer 77
+        </h2>
+      </div>
+      <div class="do_container">
+        <div class="box ">
+          <div class="img-box">
+            <img src="landing/images/d-13.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h6>
+             Microsoft Office
+            </h6>
+          </div>
         </div>
-    </section>
-
-    <section class="testimonials" id="testimoni">
-        <div class="testimonials-container">
-            <h2>Apa Kata Mereka?</h2>
-            <div class="testimonial-card">
-                <p>"Belajar di Computer 77 sangat menyenangkan. Materinya mudah dipahami dan mentornya sangat membantu."</p>
-                <h4>Aqiel Mubarok</h4>
-            </div>
+        <div class="box ">
+          <div class="img-box">
+            <img src="landing/images/d-2.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h6>
+              Basic Programing
+            </h6>
+          </div>
         </div>
-    </section>
+        <div class="box">
+          <div class="img-box">
+            <img src="landing/images/d-14.png" alt="">
+          </div>
+          <div class="detail-box">
+            <h6>
+             Graphic Design
+            </h6>
+          </div>
+        </div>
+      
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <section class="client_section" id="testimoni">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Testimoni
+        </h2>
+      </div>
+      <div class="carousel-wrap ">
+        <div class="owl-carousel">
+          <div class="item">
+            <div class="box">
+              <div class="img-box">
+                <img src="landing/images/fadli.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                 M.Fadli <br>
+                  <span>
+                    Founder
+                  </span>
+                </h5>
+                <img src="landing/images/quote.png" alt="">
+                <p>
+                Kehadiran "Sakti sebagai Study club adalah wadah untuk belajar,berinovasi dan bersama-sama berkembang 
+                sebagai mahasiswa yang kreatif dan berintegritas 
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="box">
+              <div class="img-box">
+                <img src="landing/images/c-2.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Tempor incididunt <br>
+                  <span>
+                    Dipiscing elit
+                  </span>
+                </h5>
+                <img src="landing/images/quote.png" alt="">
+                <p>
+                  Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="box">
+              <div class="img-box">
+                <img src="landing/images/c-3.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Tempor incididunt <br>
+                  <span>
+                    Dipiscing elit
+                  </span>
+                </h5>
+                <img src="landing/images/quote.png" alt="">
+                <p>
+                  Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
     <section class="contact" id="kontak">
     <div class="contact-container">
@@ -507,13 +601,40 @@ nav a:hover {
             </div>
         </div>
         <div class="about-image">
-            <img src="{{ asset('img/komputer 77.jpg') }}" alt="Tim Bimbel 77">
+            <img src="{{ asset('img/komputer_77.png') }}" alt="Tim Bimbel 77">
         </div>
     </div>
 </section>
+<script type="text/javascript" src="landing/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="landing/js/bootstrap.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- owl carousel script 
+    -->
+  <script type="text/javascript">
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 0,
+      navText: [],
+      center: true,
+      autoplay: true,
+      autoplayHoverPause: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        1000: {
+          items: 3
+        }
+      }
+    });
+  </script>
 
-    <footer class="footer">
-        <p>&copy; 2024 Computer 77 - Bimbel Online Komputer. All rights reserved.</p>
-    </footer>
+<section class="container-fluid footer_section">
+    <p>
+      &copy; <span id="current-year"></span> Computer 77. All Rights Reserved.
+      
+    </p>
+</section>
 </body>
 </html>
