@@ -3,7 +3,7 @@
  CARA INSTALL 
 
 
- Composer install 
+-  Composer install 
 -  Buat halaman .env atau bisa copy cp .env.example .env
 - atau bisa buat .env sendiri  di dalam folder yang sudah di clone dengan kode berikut ini
  - APP_NAME=Laravel
