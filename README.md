@@ -85,7 +85,7 @@
  ** Setelah di koneksikan kemudian migrasi seeder yang telah dibuat ** 
  - php artisan migrate:fresh --seed
 -  setelah semua sudah termigrasi
--  test running dengan ketik php artisan ser
+-  test running dengan ketik php artisan serve
 - akun admin **  
  - username : komputer77@admin.lms
  - pwd      : lms123321
