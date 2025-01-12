@@ -1,4 +1,4 @@
- <!-- code Apps 
+ code Apps 
 
  CARA INSTALL 
 
@@ -42,9 +42,9 @@ Buat halaman .env atau bisa copy cp .env.example .env
 
  BROADCAST_CONNECTION=log
  FILESYSTEM_DISK=local
- QUEUE_CONNECTION=database -->
+ QUEUE_CONNECTION=database
 
-<!-- CACHE_STORE=database
+CACHE_STORE=database
 CACHE_PREFIX=
 
 MEMCACHED_HOST=127.0.0.1
@@ -69,26 +69,26 @@ AWS_DEFAULT_REGION=us-east-1
 AWS_BUCKET=
 AWS_USE_PATH_STYLE_ENDPOINT=false
 
-VITE_APP_NAME="${APP_NAME}" -->
+VITE_APP_NAME="${APP_NAME}"
 
 
- <!-- 
+ 
  setelah itu buat key baru
  php artisan key:generate 
  Create db 
  Migrate 
- php artisan migrate  -->
+ php artisan migrate 
 
 
 
-<!-- 
+
  Setelah di koneksikan kemudian migrasi seeder yang telah dibuat 
  php artisan migrate:fresh --seed
  setelah semua sudah termigrasi 
  test running dengan ketik php artisan serve
  akun admin  
  username : komputer77@admin.lms
- pwd      : lms123321 --> -->
+ pwd      : lms123321
 
 
 
